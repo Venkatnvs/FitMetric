@@ -1,0 +1,67 @@
+<div class="container mt-0 pt-0">
+    <div class="row m-0 p-0">
+        <div class="text-center text-black">
+            <h1>Welcome to {{site_name}}</h1>
+        </div>
+    </div>
+    <div class="slider-container px-3">
+        <div class="slick-slider">
+            {% for title in titles %}
+                <div class="slide">
+                    <h2 class="main_title">{{ title }}</h2>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="container bg-default">
+    <div class="row">
+        <div class="text-center mt-3">
+            <h1>Categories</h1>
+        </div>
+    </div>
+
+    <div class="container px-5">
+        <div class="box-container">
+    
+            <a href="{% url 'main-tdee' %}" class="card-link">
+                <div class="card">
+                    <i class="fa-solid fas fas fa-dumbbell fa-2x text-center mb-3"></i>
+                    <h2 class="text-center">Tdee</h2>
+                    <p class="text-center">Elevate your fitness journey by understanding and optimizing Total Daily Energy Expenditure (TDEE).</p>
+                </div>
+            </a>
+    
+            <a href="tdee-page.html" class="card-link">
+                <div class="card">
+                    <i class="fa-solid fas fa-apple-alt fa-2x text-center mb-3"></i>
+                    <h2 class="text-center">Nutrition</h2>
+                    <p class="text-center">Balanced nutrition fuels the body, promoting vitality and overall well-being.</p>
+                </div>
+            </a>
+    
+            <a href="tdee-page.html" class="card-link">
+                <div class="card">
+                    <i class="fa-solid fa-gamepad fa-2x text-center mb-3"></i>
+                    <h2 class="text-center">Games</h2>
+                    <p class="text-center">Engage in health-enhancing games for sharper cognitive skills and improved eyesight.</p>
+                </div>
+            </a>
+    
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row my-3">
+      <h2 class="text-center text-default">Stay Updated With {{site_name}}!!!</h2>
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="input-group mb-2 mt-3">
+          <p class="text-center text-default">Stay informed and empowered with our comprehensive health guides and resources.</p>
+          <input type="email" class="form-control border border-2 border-default" placeholder="Enter Your Email!!" style="height: 50px;">
+          <button class="btn btn-default px-4" type="submit"> submit </button>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div> 
+  </div>

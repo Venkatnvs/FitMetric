@@ -1,1 +1,79 @@
 {% extends 'base/index.html' %}
+
+{% block title %}
+    Home | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+{% include 'dashboard/_details/main_home.html' %}
+{% endblock content %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+<style>
+    .container{
+        max-width: 100%;
+        padding: 20px;
+    }
+    .box-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 40px;
+        padding: 18px;
+        justify-content: center;
+    }
+    .card {
+        border: 1px solid #ddd; 
+        border-radius: 10px;
+        padding: 20px;
+    }
+    .slick-prev::before, .slick-next::before {
+        color: #000000 !important;
+    }
+    .slick-slider {
+        /* background-image: url('https://vidhilegalpolicy.in/wp-content/uploads/2021/10/mental-health-wellness-during-covid-19.jpg');
+        background-image: url('https://www.narayanahealth.org/blog/wp-content/uploads/2023/05/Understanding-Preventive-Health-Check-ups.jpeg'); */
+        background-image: url('https://www.ama.com.au/sites/default/files/styles/limit_height/public/2023-10/Private%20health%20insurance.png?itok=a6kSDpoV');
+        width: 100%;
+        min-height: 300px;
+        max-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        object-fit: cover;
+        aspect-ratio: 3/1;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+    }
+    .slick-slider .main_title{
+        width: 100%;
+        color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        z-index: 2;
+        font-weight: 700;
+    }
+</style>
+{% endblock styles %}
+
+{% block scripts %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.slick-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrows: true,
+            dots:true
+        });
+    });
+</script>
+{% endblock scripts %}

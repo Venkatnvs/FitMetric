@@ -1,0 +1,103 @@
+{% extends 'base/index.html' %}
+
+{% block title %}
+TDEE Calculator | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <h4 class="text-center"><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;Recent Calculated</h4>
+            
+            {% if recent_data %}
+                {% for data in recent_data %}
+                    {% if forloop.counter0 == 0 %}
+                    <div class="card my-2">
+                        <div class="card-header m-0 py-0">
+                            Latest
+                        </div>
+                        <div class="card-body p-1">
+                            <span><span class="fw-bolder">Calories: </span>{{data.calories}} Calories/day</span><br>
+                            <span><span class="fw-bolder">BMI: </span>{{data.bmi}} kg/m2</span><br>
+                            <span><span class="fw-bolder">Protein: </span>{{data.nutrients.protein}} g</span><br>
+                            <span><span class="fw-bolder">Fat: </span>{{data.nutrients.fat}} g</span><br>
+                            <span><span class="fw-bolder">Carbohydrates: </span>{{data.nutrients.carbohydrates}} g</span><br>
+                            <div>
+                                <a class="btn btn-info btn-sm" href="#">View More</a>
+                                <span class="text-muted text-xs">{{data.created_at}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="card my-2">
+                        <div class="card-body p-1">
+                            <span><span class="fw-bolder">Calories: </span>{{data.calories}} Calories/day</span><br>
+                            <span><span class="fw-bolder">BMI: </span>{{data.bmi}} kg/m2</span><br>
+                            <div>
+                                <a class="btn btn-info btn-sm" href="#">View More</a>
+                                <span class="text-muted text-xs">{{data.created_at}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+            <div class="card">
+                <div class="card-body pt-1">
+                    <p class="text-center m-0">No Recent Data!</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-title">
+                    <h3 class="text-center">TDEE Calculator</h3>
+                </div>
+                <div class="card-body">
+                    <form id="tdeeForm" action="{% url 'main-tdee' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group mt-2">
+                            <label for="age">Age:</label>
+                            <input type="number" name="age" class="form-control" id="age" value="{{ FieldValues.age }}" required placeholder="Age">
+                        </div>
+                
+                        <div class="form-group mt-2">
+                            <label for="gender">Gender:</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                
+                        <div class="form-group mt-2">
+                            <label for="height">Height (cm):</label>
+                            <input type="number" class="form-control" id="height" name="height" value="{{ FieldValues.height }}" required>
+                        </div>
+                
+                        <div class="form-group mt-2">
+                            <label for="weight">Weight (kg):</label>
+                            <input type="number" class="form-control" id="weight" name="weight" value="{{ FieldValues.weight }}" required>
+                        </div>
+                
+                        <div class="form-group mt-2">
+                            <label for="activityLevel">Activity Level:</label>
+                            <select class="form-control" id="activityLevel" name="activityLevel" required>
+                                <option value="level1">Sedentary (little or no exercise)</option>
+                                <option value="level2">Lightly active (light exercise/sports 1-3 days/week)</option>
+                                <option value="level3">Moderately active (moderate exercise/sports 3-5 days/week)</option>
+                                <option value="level4">Very active (hard exercise/sports 6-7 days a week)</option>
+                                <option value="level5">Super active (very hard exercise/sports & physical job or 2x training)</option>
+                            </select>
+                        </div>
+                
+                        <button type="submit" class="btn btn-primary mt-3 w-100">Calculate</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
