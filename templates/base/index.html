@@ -56,6 +56,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="{% static 'main/js/main.js' %}"></script>
   <script src="{% static 'main/js/added_main.js' %}"></script>
+  <script type="text/javascript">
+    (function(d, m){
+
+    /*---------------- Kommunicate settings start ----------------*/
+
+     var kommunicateSettings = {
+      "appId": "2f3f487ccb9d610b21153d20ae76cd65f",
+      "automaticChatOpenOnNavigation": true,
+      "popupWidget": true
+      /*
+      "onInit": function (){
+        // paste your code here
+      }
+      */
+      };
+
+    /*----------------- Kommunicate settings end ------------------*/
+
+     var s = document.createElement("script");
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      var h = document.getElementsByTagName("head")[0];
+      h.appendChild(s);
+      window.kommunicate = m;
+      m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+</script>
+
   {% block scripts %}
 
   {% endblock scripts %}
