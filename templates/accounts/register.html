@@ -1,0 +1,112 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block title %} Register | {{site_name}}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center m-0 mb-3">
+  <div class="col-md-4 justify-content-center text-center">
+    <div class="row large-screen">
+      <img class="img-fluid" height="350" width="350"
+        src="{% static 'main/img/register_page_logo.png' %}"
+        alt=""
+        data-aos="zoom-out" data-aos-delay="100"
+        >
+    </div>
+    <div class="row small-screen">
+      <div class="col-md-8 justify-content-center">
+        <div class="card m-0">
+          <div class="card-body m-0 p-1">
+            <img class="img-fluid" height="90" width="120"
+        src="{% static 'main/img/register_page_logo.png' %}"
+        alt=""
+        data-aos="zoom-out" data-aos-delay="100">
+            <div class="row">
+              <div class="col-md-12">
+                <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="{% provider_login_url 'google' %}?next=/"><img
+                    src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"> Signup Using Google</a>
+                    <p class="text-center m-0 p-0 mt-1">Already have an account? <a href="{% url 'accounts-login' %}">Login</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="or-container my-2">
+        <div class="line-separator"></div>
+        <div class="or-label">or</div>
+        <div class="line-separator"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7 justify-content-center">
+    <div class="card"  data-aos="fade-left" data-aos-delay="50">
+      <div class="card-title justify-content-center m-0 text-center p-2">
+        <h3 class="m-0 p-0">Sign Up</h3>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'accounts-register' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {% include 'accounts/_details/basic_info.html' %}
+
+          <div class="form-group mt-3">
+            <div class="form-check">
+              <input required class="form-check-input check_box_nvs" name="terms_cond" type="checkbox" id="gridCheck" {% if FieldValues.terms_cond == 'on' %}checked{% endif %}/>
+              <label class="form-check-label" for="gridCheck">
+                I agree all statements in <a target="_blank" href="{% url 'utils-terms-conds' %}" class="text-body"><u>Terms of service</u></a>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-default w-100 mt-3 submit-btn" type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+    <div class="col text-center m-0 large-screen">
+      <div class="or-container">
+        <div class="line-separator"></div>
+        <div class="or-label">or</div>
+        <div class="line-separator"></div>
+      </div>
+      <div class="row card py-2">
+        <div class="col-md-12">
+          <a class="btn btn-google btn-block text-uppercase btn-outline-primary" href="{% provider_login_url 'google' %}?next=/">
+            <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"> <span class="">Signup Using Google</span></a>
+              <p class="text-center m-0 p-0 mt-1">Already have an account? <a href="{% url 'accounts-login' %}">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'accounts/js/email_auto_check.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+  const input = document.querySelector("#inputmobile_no");
+      window.intlTelInput(input, {
+        separateDialCode: true,
+        hiddenInput: "mobile_no_full",
+        nationalMode: false, 
+        preferredCountries: ["in"],
+        initialCountry: "auto",
+        geoIpLookup: callback => {
+          fetch("https://ipapi.co/json")
+            .then(res => res.json())
+            .then(data => callback(data.country_code))
+            .catch(() => callback("in"));
+        },
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+      });
+</script>
+{% endblock scripts %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+{% endblock styles %}
+  

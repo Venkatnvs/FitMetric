@@ -1,0 +1,90 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block title %}
+Contact Us | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="d-flex justify-content-center">
+            <img style="max-height: 230px;" class="img-fluid" src="{% static 'main/img/contact_page_logo.png' %}" alt="contact_us_logo">
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card mt-2">
+            <div class="card-header">
+                <h2 class="text-default">Contact Us</h2>
+            </div>
+            <div class="card-body pt-2">
+                <form action="{% url 'utils-contact-us' %}" method="post">
+
+                    {% csrf_token %}
+
+                    <div class="row mt-1">
+                        <label class="col-sm-3 col-form-label" for="inputname">Name</label>
+                        <div class="col-sm-9">
+                            <input required type="text" name="name" placeholder="Name" class="form-control"
+                            id="inputname" value="{{ FieldValues.name }}" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <label class="col-sm-3 col-form-label" for="inputemail">Email address</label>
+                        <div class="col-sm-9">
+                            <input required type="email" name="email" placeholder="abc@gmail.com" class="form-control" id="inputemail"
+                            value="{{ FieldValues.email }}" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <label for="inputmobile_no" class="col-sm-3 col-form-label">Mobile Number</label>
+                        <div class="col-sm-9">
+                            <input required type="tel" class="form-control" name="mobile_no" id="inputmobile_no" maxlength="18"
+                            value="{{ FieldValues.mobile_no_full }}">
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <label for="message_area" class="form-label">Message </label>
+                        <textarea required placeholder="Message" class="form-control" name="message" id="message_area" rows="3">{{ FieldValues.message}}</textarea>
+                    </div>
+
+                    <button class="btn btn-default w-100 mt-3" type="submit">Submit</button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+    const input = document.querySelector("#inputmobile_no");
+    window.intlTelInput(input, {
+        separateDialCode: true,
+        hiddenInput: "mobile_no_full",
+        nationalMode: false, 
+        preferredCountries: ["in"],
+        initialCountry: "auto",
+        geoIpLookup: callback => {
+            fetch("https://ipapi.co/json")
+              .then(res => res.json())
+              .then(data => callback(data.country_code))
+              .catch(() => callback("in"));
+        },
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+      });
+</script>
+{% endblock scripts %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+{% endblock styles %}
+  

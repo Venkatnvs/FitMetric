@@ -1,0 +1,19 @@
+{% load static %}
+<header id="header">
+    <nav class="nav-header header-nav">
+        <div class="text-light">
+            <a href="/">
+                <img src="{% static 'icons/logo.jpg' %}" alt="logo"/>
+                <h2>{{site_name}}</h2>
+            </a>
+        </div>
+        <div style="gap: 6px;" class="mx-1">
+            {% if request.user.is_authenticated %}
+            {% include 'base/_details/profile_on_login.html' %}
+            {% else %}
+            <a href="{% url 'accounts-login' %}" class="btn btn-outline-light rounded-2">Login</a>
+            <a href="{% url 'accounts-register' %}" class="btn btn-light text-default">SignUp</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>

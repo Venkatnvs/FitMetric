@@ -1,0 +1,61 @@
+{% load static %}
+<li class="nav-item dropdown nv-profile">
+
+    <a class="nav-link nav-profile profile-dd d-flex align-items-center pe-0 pt-0" href="#">
+      <img src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_5247852.jpg" alt="Profile" height="35" width="35" class="rounded-circle">
+      <span class="ps-1">{{request.user.full_name}}</span><i class="bi bi-chevron-down"></i>
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile p-0 m-0">
+      <li class="dropdown-header">
+        <span>{{request.user.full_name}}</span>
+        <h6 style="max-width:240px;overflow:hidden">{{request.user.email}}</h6>
+      </li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      {% if request.user.is_completed or request.user.is_staff %}
+      <li>
+        <a class="dropdown-item d-flex align-items-center" href="">
+          <i class="bi bi-gear"></i>
+          <span>Account Settings</span>
+        </a>
+      </li>
+      {% endif %}
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      {% if request.user.is_staff %}
+      <li>
+        <a class="dropdown-item d-flex align-items-center" href="/admin/">
+          <i class="bi bi-person-workspace"></i>
+          <span>Admin Dashboard</span>
+        </a>
+      </li>
+      <li>
+          <hr class="dropdown-divider">
+        </li>
+        {% endif %}
+    
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                      <i class="bi bi-question-circle"></i>
+                      <span>Need Help?</span>
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+    
+                  <li class="logout-head-bt">
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                      <i class="bi bi-box-arrow-right"></i>
+                      <form class="form" action="{% url 'accounts-logout' %}" method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-sm btn-default" type="submit" value="Sign Out">
+                      </form>
+                    </a>
+                  </li>
+    
+                </ul>
+              </li>
