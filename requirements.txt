@@ -4,7 +4,7 @@ whitenoise
 gunicorn
 dj-database-url
 psycopg2-binary
-validate_email
+validate-email==1.3
 six
 django-allauth
 djangorestframework
