@@ -18,7 +18,7 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
-SITE_NAME = "HealthScore"
+SITE_NAME = "FitMetric"
 SITE_ID = 1
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'utils',
     'accounts',
     'dashboard',
+    'predict',
 ]
 
 SOCIALACCOUNT_PROVIDERS = {

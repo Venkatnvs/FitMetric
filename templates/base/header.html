@@ -1,19 +1,32 @@
 {% load static %}
-<header id="header">
-    <nav class="nav-header header-nav">
-        <div class="text-light">
-            <a href="/">
-                <img src="{% static 'icons/logo.jpg' %}" alt="logo"/>
-                <h2>{{site_name}}</h2>
-            </a>
-        </div>
-        <div style="gap: 6px;" class="mx-1">
-            {% if request.user.is_authenticated %}
+<header id="header" class="header fixed-top bg-">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center">
+        <img class="mx-0" src="{% static 'icons/favicon.png' %}" alt="logo"/>
+        <span class="mx-2">{{site_name}}</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li class="dropdown"><a href="{% url 'predict-home' %}"><span>Predict Disease</span></a>
+
+          </li>
+          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+            
+          </li>
+          <li class="dropdown"><a href=""><span>Study Abroad</span> <i class="bi bi-chevron-down"></i></a>
+          </li>
+          <li><a class="nav-link" href="{% url 'utils-contact-us' %}">Contact</a></li>
+          {% if request.user.is_authenticated %}
             {% include 'base/_details/profile_on_login.html' %}
-            {% else %}
-            <a href="{% url 'accounts-login' %}" class="btn btn-outline-light rounded-2">Login</a>
-            <a href="{% url 'accounts-register' %}" class="btn btn-light text-default">SignUp</a>
+          {% else %}
+            <li><a href="{% url 'accounts-login' %}" class="header_lr_btn_login btn btn-outline-light">Login</a></li>
+            <li><a href="{% url 'accounts-register' %}" class="header_lr_btn_reg btn btn-light text-default">SignUp</a></li>
             {% endif %}
-        </div>
-    </nav>
-</header>
+        </ul>
+        
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>

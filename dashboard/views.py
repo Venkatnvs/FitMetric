@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.views import View
 from django.contrib import messages
 from .models import TdeeData
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def Home(request):
     titles = [
@@ -45,7 +46,7 @@ def Home(request):
     }
     return render(request,'dashboard/index.html',context)
 
-class TdeePage(View):
+class TdeePage(LoginRequiredMixin,View):
     def get(self,request):
         context = {
             'recent_data':self.GetRecentData()
@@ -78,3 +79,10 @@ class TdeePage(View):
     
     def GetRecentData(self):
         return TdeeData.objects.filter(user=self.request.user).order_by('-created_at')[:4]
+
+class NutritionPage(LoginRequiredMixin,View):
+    def get(self,request):
+        return render(request,'dashboard/nutrition.html')
+    
+    def post(self,request):
+        pass
