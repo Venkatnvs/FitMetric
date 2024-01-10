@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'FitMetric.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('POSTGRESQL_URL'),
+        default=config('POSTGRES_URL'),
         conn_max_age=600
     )
 }
