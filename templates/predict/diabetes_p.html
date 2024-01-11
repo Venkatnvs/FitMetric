@@ -1,0 +1,72 @@
+{% extends 'base/index.html' %}
+
+{% block title %}
+Diabetes Predict | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-default text-center">Predict Your Diabetes</h1>
+    {% if result %}
+    <div class="card p-2 bg-default">
+        <h3>Result</h3>
+        <p>{{result}}</p>
+    </div>
+    {% else %}
+    <form id="form-target" action="{% url 'predict-diabetes' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <p class="subheading text-gray text-center">Fill all the details</p>
+            <div class="d-flex justify-content-center">
+                
+                
+                <div class="col-md-8">
+                        <div class="card p-4">
+                    <div class="form-group mb-2">
+                        <label for="pregnancies">Number of Pregnancies</label>
+                        <input type="number" class="form-control" id="pregnancies" name="pregnancies" placeholder="eg. 0 for male" required>
+                      </div>
+                
+                      <div class="form-group mb-2">
+                        <label for="glucose">Glucose Level (mg/dL)</label>
+                        <input type="number" class="form-control" id="glucose" name="glucose" placeholder="eg. 80" required>
+                      </div>
+                
+                      <div class="form-group mb-2">
+                        <label for="bloodpressure">Blood Pressure (mmHg)</label>
+                        <input type="number" class="form-control" id="bloodpressure" name="bloodpressure" placeholder="eg. 80" required>
+                      </div>
+                
+                      <div class="form-group mb-2">
+                        <label for="skinthickness">Skin Thickness (mm)</label>
+                        <input type="number" class="form-control" id="skinthickness" name="skinthickness" placeholder="eg. 20" required>
+                      </div>
+                
+                      <div class="form-group mb-2">
+                        <label for="insulin">Insulin Level (IU/mL) </label>
+                        <input type="number" class="form-control" id="insulin" name="insulin" placeholder="eg. 80" required>
+                      </div>
+                
+                      <div class="form-group mb-2">
+                        <label for="bmi">Body Mass Index (kg/m²)</label>
+                        <input type="number" class="form-control" id="bmi" name="bmi" placeholder="eg. 23.1" required>
+                      </div>
+                
+                      <div class="form-group mb-2">
+                        <label for="dpf">Diabetes Pedigree Function</label>
+                        <input type="text" class="form-control" id="dpf" name="dpf" placeholder="eg. 0.52" required>
+                      </div>
+                
+                      <div class="form-group mb-2">
+                        <label for="age">Patient Age in Years</label>
+                        <input type="number" class="form-control" id="age" name="age" placeholder="eg. 34" required>
+                      </div>
+                      <button class="btn btn-default w-100 mt-3" type="submit">Submit</button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,121 @@
+{% extends 'base/index.html' %}
+
+{% block title %}
+Heart Disease Predict | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-default text-center">Predict Your Heart Disease</h1>
+    {% if result %}
+    <div class="card p-2 bg-default">
+        <h3>Result</h3>
+        <p>{{result}}</p>
+    </div>
+    {% else %}
+    <form id="form-target" action="{% url 'predict-heart' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <p class="subheading text-gray text-center">Fill all the details</p>
+            <div class="d-flex justify-content-center">
+                <div class="col-md-8">
+                    <div class="card p-4">
+                        <div class="form-group mb-2">
+                            <label for="age" class="form-label">Age:</label>
+                            <input type="number" class="form-control" name="age">
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="sex" class="form-label">Sex:</label>
+                            <select class="form-select" name="sex">
+                              <option value="0">Male</option>
+                              <option value="1">Female</option>
+                            </select>
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="cp" class="form-label">Chest pain type:</label>
+                            <select class="form-select" name="cp">
+                              <option value="0">Typical angina</option>
+                              <option value="1">Atypical angina</option>
+                              <option value="2">Non-anginal pain</option>
+                              <option value="3">Asymptomatic</option>
+                            </select>
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="trestbps" class="form-label">Resting blood pressure:</label>
+                            <input type="number" class="form-control" name="trestbps">
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="chol" class="form-label">Serum cholesterol in mg/dl:</label>
+                            <input type="number" class="form-control" name="chol">
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="fbs" class="form-label">Fasting blood sugar &gt; 120 mg/dl:</label>
+                            <select class="form-select" name="fbs">
+                              <option value="0">False</option>
+                              <option value="1">True</option>
+                            </select>
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="restecg" class="form-label">Resting electrocardiographic results:</label>
+                            <select class="form-select" name="restecg">
+                              <option value="0">Normal</option>
+                              <option value="1">ST-T wave abnormality</option>
+                              <option value="2">Left ventricular hypertrophy</option>
+                            </select>
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="thalach" class="form-label">Maximum heart rate achieved:</label>
+                            <input type="number" class="form-control" name="thalach">
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="exang" class="form-label">Exercise induced angina:</label>
+                            <select class="form-select" name="exang">
+                              <option value="0">No</option>
+                              <option value="1">Yes</option>
+                            </select>
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="oldpeak" class="form-label">ST depression induced by exercise relative to rest:</label>
+                            <input type="number" class="form-control" name="oldpeak">
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="slope" class="form-label">The slope of the peak exercise ST segment:</label>
+                            <select class="form-select" name="slope">
+                              <option value="0">Upsloping</option>
+                              <option value="1">Flat</option>
+                              <option value="2">Downsloping</option>
+                            </select>
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="ca" class="form-label">Number of major vessels (0-3) colored by flourosopy:</label>
+                            <input type="number" class="form-control" name="ca">
+                          </div>
+
+                          <div class="form-group mb-2">
+                            <label for="thal" class="form-label">Thallium stress test result:</label>
+                            <select class="form-select" name="thal">
+                              <option value="0">Normal</option>
+                              <option value="1">Fixed defect</option>
+                              <option value="2">Reversible defect</option>
+                            </select>
+                          </div>
+                        <button class="btn btn-default w-100 mt-3" type="submit">Submit</button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock content %}

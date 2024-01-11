@@ -1,0 +1,75 @@
+{% extends 'base/index.html' %}
+
+{% block title %}
+Liver Disease Predict | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-default text-center">Predict Your Liver Disease</h1>
+    {% if result %}
+    <div class="card p-2 bg-default">
+        <h3>Result</h3>
+        <p>{{result}}</p>
+    </div>
+    {% else %}
+    <form id="form-target" action="{% url 'predict-liver' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <p class="subheading text-gray text-center">Fill all the details</p>
+            <div class="d-flex justify-content-center">
+                <div class="col-md-8">
+                    <div class="card p-4">
+                        <div class="form-group mb-2">
+                            <label for="age">Age:</label>
+                            <input type="number" class="form-control" name="age" placeholder="Enter your Age">
+                          </div>
+                          
+                          <div class="form-group mb-2">
+                            <label for="sex">Sex:</label>
+                            <select class="form-select" name="sex">
+                              <option value="0">Male</option>
+                              <option value="1">Female</option>
+                            </select>
+                          </div>
+                        <div class="form-group mb-2">
+                            <label for="Total Bilirubin">Total Bilirubin</label>
+                            <input class="form-control" type="number" id="Total Bilirubin" name="Total_Bilirubin" required="required" placeholder="Enter the Total Bilirubin">
+                          </div>
+                          <div class="form-group mb-2">
+                            <label for="Direct_Bilirubin">Direct Bilirubin</label>
+                            <input class="form-control" type="number" step="any" id="Direct_Bilirubin" name="Direct_Bilirubin" required="required" placeholder="Enter the Direct_Bilirubin">
+                          </div>
+                          <div class="form-group mb-2">
+                            <label for="Alkaline_Phosphotase">Alkaline Phosphotase</label>
+                            <input class="form-control" type="number" id="Alkaline_Phosphotase" name="Alkaline_Phosphotase" required="required" placeholder="Enter the Alkaline Phosphotase">
+                          </div>
+                          <div class="form-group mb-2">
+                            <label for="Alamine_Aminotransferase">Alamine Aminotransferase</label>
+                            <input class="form-control" type="number" id="Alamine_Aminotransferase" name="Alamine_Aminotransferase" required="required" placeholder="Enter the Alamine Aminotransferase">
+                          </div>
+                          <div class="form-group mb-2">
+                            <label for="Aspartate_Aminotransferase">Aspartate Aminotransferase</label>
+                            <input class="form-control" type="number" id="Aspartate_Aminotransferase" name="Aspartate_Aminotransferase" required="required" placeholder="Enter the Aspartate Aminotransferase">
+                          </div>
+                          <div class="form-group mb-2">
+                            <label for="Total_Protiens">Total Protiens</label>
+                            <input class="form-control" type="number" id="Total_Protiens" name="Total_Protiens" required="required" placeholder="Enter the Total Protiens">
+                          </div>
+                          <div class="form-group mb-2">
+                            <label for="Albumin">Albumin</label>
+                            <input class="form-control" type="number" id="Albumin" name="Albumin" required="required" placeholder="Enter the Albumin">
+                          </div>
+                          <div class="form-group mb-2">
+                            <label for="Albumin_and_Globulin_Ratio">Albumin and Globulin Ratio</label>
+                            <input class="form-control" type="number" id="Albumin_and_Globulin_Ratio" name="Albumin_and_Globulin_Ratio" required="required" placeholder="Enter the Albumin and Globulin Ratio">
+                          </div>
+                        <button class="btn btn-default w-100 mt-3" type="submit">Submit</button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -12,13 +12,47 @@ Predict | {{site_name}}
             <img class="img-fluid" src="{% static 'main/img/predict-img.png' %}" alt="">
         </div>
         <div class="col-md-9">
-            <div class="d-flex mt-3">
+            <h3 class="text-center mb-1">Available Prediction</h3>
+            <p class="subheading text-gray text-center">Select a Prediction Method</p>
+            <div class="d-flex flex-wrap mt-3">
                 <a class="card-link" href="{% url 'predict-mental-health' %}">
-                    <div class="card p-2">
-                        <div class="text-center">
+                    <div class="card p-2 m-2">
+                        <div class="text-center mb-2">
                             <i class="fa-solid fa-2x fa-head-side-virus"></i>
                         </div>
                         <span>Mental Health Predict</span>
+                    </div>
+                </a>
+                <a class="card-link" href="{% url 'predict-heart' %}">
+                    <div class="card p-2 m-2">
+                        <div class="text-center mb-2">
+                            <i class="fa-solid fa-2x fa-heart-pulse"></i>
+                        </div>
+                        <span>Heart Disease Predict</span>
+                    </div>
+                </a>
+                <a class="card-link" href="{% url 'predict-diabetes' %}">
+                    <div class="card p-2 m-2">
+                        <div class="text-center mb-2">
+                            <i class="fa-solid fa-2x fa-thermometer"></i>
+                        </div>
+                        <span>Diabetes Predict</span>
+                    </div>
+                </a>
+                <a class="card-link" href="{% url 'predict-breast-cancer' %}">
+                    <div class="card p-2 m-2">
+                        <div class="text-center mb-2">
+                            <i class="fa-solid fa-2x fa-heart"></i>
+                        </div>
+                        <span>Breast Cancer Predict</span>
+                    </div>
+                </a>
+                <a class="card-link" href="{% url 'predict-liver' %}">
+                    <div class="card p-2 m-2">
+                        <div class="text-center mb-2">
+                            <i class="fa-solid fa-2x fa-notes-medical"></i>
+                        </div>
+                        <span>Liver Disease Predict</span>
                     </div>
                 </a>
             </div>

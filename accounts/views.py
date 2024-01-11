@@ -125,7 +125,7 @@ class Logout(View):
     def post(self, request):
         logout(request)
         messages.success(request, 'You have been logged out')
-        return redirect('dashboard-home')
+        return redirect('main-home')
 
 class ForgetPassword(View):
     def get(self,request):
