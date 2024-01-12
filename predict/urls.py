@@ -8,4 +8,5 @@ urlpatterns = [
     path('heart', HeartPrediction.as_view(), name='predict-heart' ),
     path('breast-cancer', BreastCancerPredict.as_view(), name='predict-breast-cancer' ),
     path('liver', LiverPredict.as_view(), name='predict-liver' ),
+    path('kidney', KidneyPredict.as_view(), name='predict-kidney' ),
 ]

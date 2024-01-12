@@ -12,9 +12,9 @@ Predict | {{site_name}}
             <img class="img-fluid" src="{% static 'main/img/predict-img.png' %}" alt="">
         </div>
         <div class="col-md-9">
-            <h3 class="text-center mb-1">Available Prediction</h3>
+            <h2 class="text-center mt-2 mb-1">Available Prediction</h2>
             <p class="subheading text-gray text-center">Select a Prediction Method</p>
-            <div class="d-flex flex-wrap mt-3">
+            <div class="d-flex flex-wrap justify-content-center mt-3">
                 <a class="card-link" href="{% url 'predict-mental-health' %}">
                     <div class="card p-2 m-2">
                         <div class="text-center mb-2">
@@ -53,6 +53,40 @@ Predict | {{site_name}}
                             <i class="fa-solid fa-2x fa-notes-medical"></i>
                         </div>
                         <span>Liver Disease Predict</span>
+                    </div>
+                </a>
+                <a class="card-link" href="{% url 'predict-kidney' %}">
+                    <div class="card p-2 m-2">
+                        <div class="text-center mb-2">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                width="40px" height="35px" viewBox="0 0 512.000000 512.000000"
+                                preserveAspectRatio="xMidYMid meet">
+
+                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                fill="#000000" stroke="none">
+                                <path d="M1348 4589 c-650 -53 -1169 -556 -1318 -1279 -115 -557 133 -1274
+                                591 -1715 117 -113 208 -177 331 -235 129 -60 194 -74 338 -74 107 1 136 4
+                                205 27 113 37 198 90 285 177 132 133 189 260 198 444 3 67 0 136 -8 180 -12
+                                69 -15 73 -90 151 -100 104 -135 154 -150 215 -11 47 -10 54 15 105 30 61 77
+                                106 183 172 l73 46 41 -19 c53 -24 119 -91 149 -151 l24 -48 5 -990 c4 -748 8
+                                -995 17 -1011 30 -52 117 -73 168 -40 58 38 56 -15 53 1073 l-3 998 -22 59
+                                c-86 228 -270 365 -513 383 -86 6 -97 9 -151 46 -52 34 -88 72 -77 82 2 1 43
+                                32 91 69 136 102 213 173 298 275 204 244 252 486 142 706 -41 81 -162 192
+                                -269 248 -107 55 -247 95 -359 102 -44 3 -96 7 -115 9 -19 2 -79 -1 -132 -5z"/>
+                                <path d="M3553 4589 c-226 -17 -423 -98 -554 -228 -112 -111 -159 -218 -159
+                                -360 1 -195 94 -379 291 -573 49 -47 135 -121 191 -163 57 -43 105 -79 107
+                                -81 10 -9 -44 -63 -91 -90 -45 -27 -67 -33 -142 -38 -239 -17 -423 -155 -509
+                                -382 l-22 -59 -2 -1000 c-2 -784 0 -1005 10 -1024 41 -80 166 -84 210 -7 9 16
+                                13 263 17 1011 l5 990 24 48 c30 60 96 127 149 151 l41 19 73 -46 c106 -66
+                                153 -111 183 -172 25 -51 26 -58 15 -105 -15 -61 -50 -113 -147 -211 -66 -68
+                                -77 -83 -89 -135 -19 -77 -18 -237 0 -318 54 -232 223 -415 463 -499 80 -28
+                                99 -31 213 -31 147 0 210 14 349 80 120 57 203 116 325 234 454 438 700 1156
+                                586 1710 -118 573 -468 1014 -947 1196 -97 36 -253 72 -342 79 -42 3 -92 7
+                                -111 9 -19 1 -81 -1 -137 -5z"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <span>Kidney Disease Predict</span>
                     </div>
                 </a>
             </div>

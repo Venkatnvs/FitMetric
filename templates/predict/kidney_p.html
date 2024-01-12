@@ -1,0 +1,150 @@
+{% extends 'base/index.html' %}
+
+{% block title %}
+Kidney Disease Predict | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-default text-center">Predict Your Kidney Disease</h1>
+    {% if result %}
+    <div class="card p-2 bg-default">
+        <h3>Result</h3>
+        <p>{{result}}</p>
+    </div>
+    {% else %}
+    <form id="form-target" action="{% url 'predict-kidney' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <p class="subheading text-gray text-center">Fill all the details</p>
+            <div class="d-flex justify-content-center">
+                <div class="col-md-8">
+                    <div class="card p-4">
+                        <div class="form-group mb-2">
+                            <label for="age">Age</label>
+                            <input type="text" class="form-control" id="age" name="age" placeholder="Enter age (e.g., 25)" required>
+                          </div>
+                        
+                          <div class="form-group mb-2">
+                            <label for="bloodPressure">Blood Pressure</label>
+                            <input type="text" class="form-control" id="bloodPressure" name="blood_pressure" placeholder="Enter blood pressure (e.g., 120/80)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="specificGravity">Specific Gravity</label>
+                            <input type="text" class="form-control" id="specificGravity" name="specific_gravity" placeholder="Enter specific gravity (e.g., 1.020)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="albumin">Albumin</label>
+                            <input type="text" class="form-control" id="albumin" name="albumin" placeholder="Enter albumin level (e.g., 4.5)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="sugar">Sugar</label>
+                            <input type="text" class="form-control" id="sugar" name="sugar" placeholder="Enter sugar level (e.g., 120)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="redBloodCells">Red Blood Cells</label>
+                            <input type="text" class="form-control" id="redBloodCells" name="red_blood_cells" placeholder="Enter red blood cell count (e.g., 4.5 million/µL)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="pusCell">Pus Cell</label>
+                            <input type="text" class="form-control" id="pusCell" name="pus_cell" placeholder="Enter pus cell count (e.g., 10/µL)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="pusCellClumps">Pus Cell Clumps</label>
+                            <input type="text" class="form-control" id="pusCellClumps" name="pus_cell_clumps" placeholder="Enter presence of pus cell clumps (e.g., 1/0)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="bacteria">Bacteria</label>
+                            <input type="text" class="form-control" id="bacteria" name="bacteria" placeholder="Enter presence of bacteria (e.g., 1/0)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="bloodGlucoseRandom">Blood Glucose Random</label>
+                            <input type="text" class="form-control" id="bloodGlucoseRandom" name="blood_glucose_random" placeholder="Enter random blood glucose level (e.g., 120)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="bloodUrea">Blood Urea</label>
+                            <input type="text" class="form-control" id="bloodUrea" name="blood_urea" placeholder="Enter blood urea level (e.g., 25)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="serumCreatinine">Serum Creatinine</label>
+                            <input type="text" class="form-control" id="serumCreatinine" name="serum_creatinine" placeholder="Enter serum creatinine level (e.g., 1.2)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="sodium">Sodium</label>
+                            <input type="text" class="form-control" id="sodium" name="sodium" placeholder="Enter sodium level (e.g., 140)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="potassium">Potassium</label>
+                            <input type="text" class="form-control" id="potassium" name="potassium" placeholder="Enter potassium level (e.g., 4.0)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="haemoglobin">Haemoglobin</label>
+                            <input type="text" class="form-control" id="haemoglobin" name="haemoglobin" placeholder="Enter haemoglobin level (e.g., 12.5)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="packedCellVolume">Packed Cell Volume</label>
+                            <input type="text" class="form-control" id="packedCellVolume" name="packed_cell_volume" placeholder="Enter packed cell volume (e.g., 40)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="whiteBloodCellCount">White Blood Cell Count</label>
+                            <input type="text" class="form-control" id="whiteBloodCellCount" name="white_blood_cell_count" placeholder="Enter white blood cell count (e.g., 8000/µL)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="redBloodCellCount">Red Blood Cell Count</label>
+                            <input type="text" class="form-control" id="redBloodCellCount" name="red_blood_cell_count" placeholder="Enter red blood cell count (e.g., 5.2 million/µL)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="hypertension">Hypertension</label>
+                            <input type="text" class="form-control" id="hypertension" name="hypertension" placeholder="Enter hypertension status (e.g., 1/0)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="diabetesMellitus">Diabetes Mellitus</label>
+                            <input type="text" class="form-control" id="diabetesMellitus" name="diabetes_mellitus" placeholder="Enter diabetes mellitus status (e.g., 1/0)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="coronaryArteryDisease">Coronary Artery Disease</label>
+                            <input type="text" class="form-control" id="coronaryArteryDisease" name="coronary_artery_disease" placeholder="Enter coronary artery disease status (e.g., 1/0)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="appetite">Appetite</label>
+                            <input type="text" class="form-control" id="appetite" name="appetite" placeholder="Enter appetite status (e.g., 1/0)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="pedaEdema">Pedal Edema</label>
+                            <input type="text" class="form-control" id="pedaEdema" name="peda_edema" placeholder="Enter pedal edema status (e.g., 1/0)" required>
+                          </div>
+                      
+                          <div class="form-group mb-2">
+                            <label for="aanemia">Anemia</label>
+                            <input type="text" class="form-control" id="aanemia" name="aanemia" placeholder="Enter anemia status (e.g., 1/0)" required>
+                          </div>
+                        <button class="btn btn-default w-100 mt-3" type="submit">Submit</button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock content %}

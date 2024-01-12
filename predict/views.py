@@ -183,3 +183,52 @@ class LiverPredict(View):
             'result':guess,
         }
         return render(request,'predict/liver_p.html',context)
+    
+class KidneyPredict(View):
+    model_path = os.path.join(settings.BASE_DIR, "ml_models", "kidney_model.pkl")
+
+    def get(self,request):
+        return render(request,"predict/kidney_p.html")
+    
+    def post(self,request):
+        age = float(request.POST['age'])
+        blood_pressure = float(request.POST['blood_pressure'])
+        specific_gravity = float(request.POST['specific_gravity'])
+        albumin = float(request.POST['albumin'])
+        sugar = float(request.POST['sugar'])
+        red_blood_cells = float(request.POST['red_blood_cells'])
+        pus_cell = float(request.POST['pus_cell'])
+        pus_cell_clumps = float(request.POST['pus_cell_clumps'])
+        bacteria = float(request.POST['bacteria'])
+        blood_glucose_random = float(request.POST['blood_glucose_random'])
+        blood_urea = float(request.POST['blood_urea'])
+        serum_creatinine = float(request.POST['serum_creatinine'])
+        sodium = float(request.POST['sodium'])
+        potassium = float(request.POST['potassium'])
+        haemoglobin = float(request.POST['haemoglobin'])
+        packed_cell_volume = float(request.POST['packed_cell_volume'])
+        white_blood_cell_count = float(request.POST['white_blood_cell_count'])
+        red_blood_cell_count = float(request.POST['red_blood_cell_count'])
+        hypertension = float(request.POST['hypertension'])
+        diabetes_mellitus = float(request.POST['diabetes_mellitus'])
+        coronary_artery_disease = float(request.POST['coronary_artery_disease'])
+        appetite = float(request.POST['appetite'])
+        peda_edema = float(request.POST['peda_edema'])
+        aanemia = float(request.POST['aanemia'])
+
+        model = joblib.load(self.model_path)
+        data = pd.DataFrame([[age, blood_pressure, specific_gravity, albumin, sugar, red_blood_cells, pus_cell,
+                                pus_cell_clumps, bacteria, blood_glucose_random, blood_urea, serum_creatinine,
+                                sodium, potassium, haemoglobin, packed_cell_volume, white_blood_cell_count,
+                                red_blood_cell_count, hypertension, diabetes_mellitus, coronary_artery_disease,
+                                appetite, peda_edema, aanemia]])
+        prediction = model.predict(data)[0]
+
+        if prediction==1:
+            guess = "You has a high risk of Kidney Disease, please consult your doctor immediately"
+        else:
+            guess = "You has a low risk of Kidney Disease"
+        context = {
+            'result':guess,
+        }
+        return render(request,'predict/kidney_p.html',context)
