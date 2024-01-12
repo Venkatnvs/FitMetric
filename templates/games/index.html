@@ -1,0 +1,30 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block title %}
+    Games | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-fluid" src="{% static 'main/img/games_page_logo.png' %}" alt="">
+        </div>
+        <div class="col-md-9">
+            <h2 class="text-center mt-2 mb-1">Available Games</h2>
+            <p class="subheading text-gray text-center">Select a Game</p>
+            <div class="d-flex justify-content-center mt-3">
+                <a class="card-link" href="{% url 'games-color-game' %}">
+                    <div class="card p-2 m-2">
+                        <div class="text-center mb-2">
+                            <i class="fa-solid fa-2x fa-palette"></i>
+                        </div>
+                        <span>Color Match Game</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'base/index.html' %}
+
+{% block title %}    
+Check Your Mental Status | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+
+                <div class="col-md-10">
+                    <h1 class="text-center text-default mt-2">Check Your Mental Status</h1>
+                    
+                    <p class="text-center text-gray">“Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.”</p>
+                    
+                    <form action="" method="get">
+                        <div class="form-group text-center">
+                            <label class="text-default" for="ageGroup">Select your age group:</label>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-3 mt-3 text-center">
+                                    <select class="form-select" id="ageGroup" name="cat">
+                                        <option value="1">Under 18</option>
+                                        <option value="2">18 to 30</option>
+                                        <option value="3">Above 30</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-default mt-4" onclick="redirectToCategory()">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

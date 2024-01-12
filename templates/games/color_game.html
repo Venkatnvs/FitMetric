@@ -1,0 +1,151 @@
+{% extends 'base/index.html' %}
+
+
+{% block title %}
+Color Match Game | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container-body">
+  <div id="game-container">
+    <h1>Color Match Game</h1>
+    <p id="instructions">Are you ready for this small mind exercise game? Click start to begin.</p>
+    <input type="checkbox" id="game-start-checkbox" onchange="toggleStartButton()">
+    <label id="game-start-checkbox-l" for="game-start-checkbox">I'm ready!</label>
+    <button class="btn btn-default" id="start-button" disabled onclick="startGame()">Start Game</button>
+    
+    <div id="game-content" style="display: none;">
+      <p id="score">Score: 0</p>
+      <p id="high-score">High Score: 0</p>
+      <div id="color-display"></div>
+      <p id="target-color">Match the color: <span id="target-color-name"></span></p>
+      <div id="color-options"></div>
+      <button class="btn btn-info" id="restart-button" onclick="startGame()">Restart</button>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+
+{% block styles %}
+<style>
+  .container-body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #game-container {
+    background: linear-gradient(to bottom, #green, #yellow);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  #color-display {
+    width: 200px;
+    height: 100px;
+    margin: 20px auto;
+  }
+  .color-option {
+    width: auto;
+    height: 50px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+</style>
+{% endblock styles %}
+
+
+{% block scripts %}
+<script>
+  let gameStarted = false;
+  let score = 0;
+  let highScore = 0;
+  let timer;
+
+  const colors = ['#ff0000', '#0000ff', '#00ff00', '#ffff00', '#ffa500', '#800080'];
+  const colorNames = ['Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple'];
+  let targetColor;
+
+  function toggleStartButton() {
+    const checkbox = document.getElementById('game-start-checkbox');
+    const startButton = document.getElementById('start-button');
+    startButton.disabled = !checkbox.checked;
+  }
+
+  function startGame() {
+    gameStarted = true;
+    score = 0;
+    document.getElementById('instructions').style.display = 'none';
+    document.getElementById('game-start-checkbox').disabled = true;
+    document.getElementById('start-button').disabled = true;
+    document.getElementById('game-content').style.display = 'block';
+    generateRandomColor();
+    updateScore();
+    timer = setInterval(() => {
+      generateRandomColor();
+    }, 1000);
+
+    setTimeout(() => {
+      endGame();
+    }, 60000);
+  }
+
+  function generateRandomColor() {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    targetColor = colors[randomIndex];
+    const targetColorName = colorNames[randomIndex];
+
+    document.getElementById('color-display').style.backgroundColor = targetColor;
+    document.getElementById('target-color-name').innerText = targetColorName;
+
+    updateColorOptions();
+  }
+
+  function updateColorOptions() {
+    const colorOptionsContainer = document.getElementById('color-options');
+    colorOptionsContainer.innerHTML = '';
+
+    colors.forEach((color) => {
+      const colorOption = document.createElement('div');
+      colorOption.className = 'color-option';
+      colorOption.style.backgroundColor = color;
+      colorOption.onclick = () => handleColorSelection(color);
+      colorOptionsContainer.appendChild(colorOption);
+    });
+  }
+
+  function handleColorSelection(selectedColor) {
+    if (gameStarted) {
+      if (selectedColor === targetColor) {
+        score++;
+      } else {
+        score--;
+      }
+      updateScore();
+      generateRandomColor();
+    }
+  }
+
+  function updateScore() {
+    document.getElementById('score').innerText = `Score: ${score}`;
+    if (score > highScore) {
+      highScore = score;
+      document.getElementById('high-score').innerText = `High Score: ${highScore}`;
+    }
+  }
+
+  function endGame() {
+    clearInterval(timer);
+    gameStarted = false;
+    document.getElementById('game-start-checkbox').disabled = false;
+    document.getElementById('start-button').disabled = false;
+    document.getElementById('game-content').style.display = 'none';
+
+    // Show game over dialog
+    alert(`Game Over!\nTime's up!\nYour Score: ${score}`);
+  }
+</script>
+{% endblock scripts %}
+  
