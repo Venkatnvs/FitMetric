@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('games/', include('games.urls')),
     path('p/', include('predict.urls')),
+    path('blog/', include('blog.urls')),
     path('utils/', include('utils.urls')),
 ]
 if settings.DEBUG :

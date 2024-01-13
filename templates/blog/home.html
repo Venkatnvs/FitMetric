@@ -1,0 +1,44 @@
+{% extends 'base/index.html' %}
+{% load humanize %}
+
+{% block title %}
+Health Blog | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            {% for i in data %}
+            <div class="card mb-3" >
+                <div class="row g-0">
+                  <div class="col-md-5">
+                    <img src="{{i.2}}" class="nvs-img img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-7">
+                    <div class="card-body">
+                      <h5 class="card-title">{{i.0 |title}}</h5>
+                      <p class="card-text">{{i.1}}</p>
+                      <p class="card-text d-flex justify-content-between align-items-center">
+                        <small class="text-body-secondary">{{i.3 |naturaltime  }}</small>
+                        <a target="_blank" href="{{i.4}}" class="btn btn-default float-end">Read More</a>
+                    </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block styles %}
+    <style>
+        .nvs-img{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+{% endblock styles %}

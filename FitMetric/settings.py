@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',
 
     #Installed
     'allauth',
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
     'accounts',
     'dashboard',
     'predict',
+    'games',
+    'blog',
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -184,6 +187,9 @@ DEFAULT_FROM_EMAIL = config('EMAIL_FROM_EMAIL')
 
 # Google Api Key
 GOOGLE_API_KEY = config('GOOGLE_API_KEY')
+
+# Newsapi
+NEWS_API = config('NEWS_API')
 
 # Custom Auth model
 AUTH_USER_MODEL="accounts.CustomUser"
