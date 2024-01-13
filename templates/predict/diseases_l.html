@@ -1,0 +1,71 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block title %}
+Diseases | {{site_name}}
+{% endblock title %}
+
+{% block content %}
+<div class="container pt-1">
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-fluid" src="{% static 'main/img/diseases_p_logo.png' %}" alt="">
+        </div>
+        <div class="col-md-9">
+            <h2 class="text-center mt-2 mb-1">Predict Your Diseases</h2>
+            {% if result %}
+            <div class="card p-2 bg-default">
+                <h3>Result:</h3>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col">
+
+                        <p>{{result}}</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="form_div">
+                <p class="subheading text-gray text-center">Select a minimum 5 Symptoms</p>
+                <form id="symptomsForm" method="post" action="{% url 'predict-diseases' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="symptoms">Select Symptoms (minimum 5):</label>
+                        <select name="symptoms[]" required id="symptoms" class="form-control" multiple="multiple">
+                            {% for symptom in symptoms %}
+                                <option value="{{ symptom }}">{{ symptom }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-default mt-3 w-100" onclick="validateForm()">Submit</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block scripts %}
+    <script>
+        $('#symptoms').select2({
+            theme: 'bootstrap-5',
+            language: 'en',
+            minimumResultsForSearch: Infinity,
+            placeholder: 'Select minimum 5 Symptoms',
+            tags:false,
+            allowClear: true,
+            maximumSelectionLength: 5,
+        });
+
+        function validateForm() {
+            var selectedSymptoms = $('#symptoms').val();
+            if (selectedSymptoms.length >= 5) {
+                $('#symptomsForm').submit();
+            } else {
+                alert('Please select at least 5 symptoms.');
+            }
+        }
+    </script>
+{% endblock scripts %}
