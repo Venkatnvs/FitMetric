@@ -6,11 +6,14 @@ from django.conf import settings
 import pandas as pd
 import numpy as np
 import joblib
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
+@login_required()
 def Home(request):
     return render(request,"predict/index.html")
 
-class MentalHealthPage(View):
+class MentalHealthPage(LoginRequiredMixin,View):
     model_path = os.path.join(settings.BASE_DIR, "ml_models", "mental_health.pkl")
 
     def get(self,request):
@@ -54,7 +57,7 @@ class MentalHealthPage(View):
         return render(request,"predict/mental_health.html",context)
     
 
-class DiabetesPredict(View):
+class DiabetesPredict(LoginRequiredMixin,View):
     model_path = os.path.join(settings.BASE_DIR, "ml_models", "diabetes.pkl")
 
     def get(self,request):
@@ -85,7 +88,7 @@ class DiabetesPredict(View):
         }
         return render(request,'predict/mental_health.html',context)
 
-class HeartPrediction(View):
+class HeartPrediction(LoginRequiredMixin,View):
     model_path = os.path.join(settings.BASE_DIR, "ml_models", "heart_disease.joblib")
 
     def get(self,request):
@@ -121,7 +124,7 @@ class HeartPrediction(View):
         }
         return render(request,'predict/heart_p.html',context)
     
-class BreastCancerPredict(View):
+class BreastCancerPredict(LoginRequiredMixin,View):
     model_path = os.path.join(settings.BASE_DIR, "ml_models", "breast_cancer.joblib")
 
     def get(self,request):
@@ -153,7 +156,7 @@ class BreastCancerPredict(View):
         }
         return render(request,'predict/breast_cancer_p.html',context)
     
-class LiverPredict(View):
+class LiverPredict(LoginRequiredMixin,View):
     model_path = os.path.join(settings.BASE_DIR, "ml_models", "liver.joblib")
 
     def get(self,request):
@@ -184,7 +187,7 @@ class LiverPredict(View):
         }
         return render(request,'predict/liver_p.html',context)
     
-class KidneyPredict(View):
+class KidneyPredict(LoginRequiredMixin,View):
     model_path = os.path.join(settings.BASE_DIR, "ml_models", "kidney_model.pkl")
 
     def get(self,request):
@@ -234,7 +237,7 @@ class KidneyPredict(View):
         return render(request,'predict/kidney_p.html',context)
     
 
-class DiseasesPredict(View):
+class DiseasesPredict(LoginRequiredMixin,View):
     model_path1 = os.path.join(settings.BASE_DIR, "ml_models", "diseases_dt.joblib")
     model_path2 = os.path.join(settings.BASE_DIR, "ml_models", "diseases_rf.joblib")
     model_path3 = os.path.join(settings.BASE_DIR, "ml_models", "diseases_knn.joblib")
