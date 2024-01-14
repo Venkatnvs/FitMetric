@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="container">
+    <div class="container pt-2">
         <div class="row">
             <div class="col-md-4">
                 <div class="card mb-3">
@@ -97,6 +97,10 @@
     <script>
         function searchNutrition() {
             const foodInput = document.getElementById('foodInput').value;
+            if (foodInput == ""){
+                alert("Enter the food to search");
+                return
+            }
             const url = `{% url 'main-get_nutrition_data' %}?food_input=${foodInput}`;
             
             fetch(url)

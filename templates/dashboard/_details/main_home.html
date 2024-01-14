@@ -4,7 +4,7 @@
             <h1>Welcome to {{site_name}}</h1>
         </div>
     </div>
-    <div class="slider-container px-3">
+    <div class="slider-container px-3 mb-3">
         <div class="slick-slider">
             {% for title in titles %}
                 <div class="slide">
@@ -32,7 +32,7 @@
                 </div>
             </a>
 
-            <a href="{% url 'predict-home' %}" class="card-link">
+            <a href="{% url 'predict-diseases' %}" class="card-link">
                 <div class="card">
                     <i class="fa-solid fas fa-magnifying-glass-chart fa-2x text-center mb-3"></i>
                     <h2 class="text-center">Predict</h2>

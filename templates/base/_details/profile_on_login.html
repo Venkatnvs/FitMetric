@@ -14,17 +14,6 @@
       <li>
         <hr class="dropdown-divider">
       </li>
-      {% if request.user.is_completed or request.user.is_staff %}
-      <li>
-        <a class="dropdown-item d-flex align-items-center" href="">
-          <i class="bi bi-gear"></i>
-          <span>Account Settings</span>
-        </a>
-      </li>
-      {% endif %}
-      <li>
-        <hr class="dropdown-divider">
-      </li>
       {% if request.user.is_staff %}
       <li>
         <a class="dropdown-item d-flex align-items-center" href="/admin/">
@@ -38,7 +27,7 @@
         {% endif %}
     
                   <li>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
+                    <a class="dropdown-item d-flex align-items-center" href="{% url 'utils-contact-us' %}">
                       <i class="bi bi-question-circle"></i>
                       <span>Need Help?</span>
                     </a>

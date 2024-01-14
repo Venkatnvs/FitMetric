@@ -24,7 +24,7 @@ TDEE Calculator | {{site_name}}
                             <span><span class="fw-bolder">Fat: </span>{{data.nutrients.fat}} g</span><br>
                             <span><span class="fw-bolder">Carbohydrates: </span>{{data.nutrients.carbohydrates}} g</span><br>
                             <div>
-                                <a class="btn btn-info btn-sm" href="#">View More</a>
+                                {% comment %} <a class="btn btn-info btn-sm d-none" href="#">View More</a> {% endcomment %}
                                 <span class="text-muted text-xs">{{data.created_at}}</span>
                             </div>
                         </div>
@@ -35,7 +35,7 @@ TDEE Calculator | {{site_name}}
                             <span><span class="fw-bolder">Calories: </span>{{data.calories}} Calories/day</span><br>
                             <span><span class="fw-bolder">BMI: </span>{{data.bmi}} kg/m2</span><br>
                             <div>
-                                <a class="btn btn-info btn-sm" href="#">View More</a>
+                                {% comment %} <a class="btn btn-info btn-sm d-none" href="#">View More</a> {% endcomment %}
                                 <span class="text-muted text-xs">{{data.created_at}}</span>
                             </div>
                         </div>

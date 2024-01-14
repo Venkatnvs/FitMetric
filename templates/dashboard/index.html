@@ -31,13 +31,33 @@
         height: 200px;
         width: 100%;
     }
-    .slick-prev::before, .slick-next::before {
-        color: #000000 !important;
-    }
+    .slide-arrow{
+        position: absolute;
+        top: 50%;
+        margin-top: -15px;
+      }
+      .prev-arrow{
+        left: -30px;
+        width: 0;
+        height: 0;
+        border-left: 0 solid transparent;
+        border-right: 15px solid var(--theme);
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+      }
+      .next-arrow{
+        right: -30px;
+        width: 0;
+        height: 0;
+        border-right: 0 solid transparent;
+        border-left: 15px solid var(--theme);
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+      }
     .slick-slider {
         /* background-image: url('https://vidhilegalpolicy.in/wp-content/uploads/2021/10/mental-health-wellness-during-covid-19.jpg');
         background-image: url('https://www.narayanahealth.org/blog/wp-content/uploads/2023/05/Understanding-Preventive-Health-Check-ups.jpeg'); */
-        background-image: url('https://www.ama.com.au/sites/default/files/styles/limit_height/public/2023-10/Private%20health%20insurance.png?itok=a6kSDpoV');
+        background-image: url('http://127.0.0.1:8000/static/main/img/main.jpg');
         width: 100%;
         min-height: 300px;
         max-height: 400px;
@@ -74,7 +94,9 @@
             autoplay: true,
             autoplaySpeed: 5000,
             arrows: true,
-            dots:true
+            dots:false,
+            prevArrow: '<button class="slide-arrow prev-arrow"></button>',
+            nextArrow: '<button class="slide-arrow next-arrow"></button>'
         });
     });
 </script>

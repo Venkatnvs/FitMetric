@@ -10,7 +10,7 @@ Health Blog | {{site_name}}
     <div class="row">
         <div class="col-md-9">
             {% for i in data %}
-            <div class="card mb-3" >
+            <div class="card mb-3 rounded">
                 <div class="row g-0">
                   <div class="col-md-5">
                     <img src="{{i.2}}" class="nvs-img img-fluid rounded-start" alt="...">
@@ -21,7 +21,7 @@ Health Blog | {{site_name}}
                       <p class="card-text">{{i.1}}</p>
                       <p class="card-text d-flex justify-content-between align-items-center">
                         <small class="text-body-secondary">{{i.3 |naturaltime  }}</small>
-                        <a target="_blank" href="{{i.4}}" class="btn btn-default float-end">Read More</a>
+                        <a style="border-radius: 30px!important;" target="_blank" href="{{i.4}}" class="btn btn-default float-end">Read More&nbsp;&nbsp;<i class="fa-solid fa-chevron-right"></i></a>
                     </p>
                     </div>
                   </div>

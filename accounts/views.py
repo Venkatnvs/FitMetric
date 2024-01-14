@@ -55,6 +55,7 @@ class Registration(View):
         user.save()
         email_tmp_path = 'emails/auth/email_verification.html'
         domain = get_current_site(request).domain
+        print(get_current_site(request))
         request_main = config('REQUEST')
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         link = reverse('accounts-activate', kwargs={'uidb64':uidb64, 'token':token_generater.make_token(user)})
