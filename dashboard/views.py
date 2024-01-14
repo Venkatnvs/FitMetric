@@ -87,7 +87,7 @@ class NutritionPage(LoginRequiredMixin,View):
     def post(self,request):
         pass
 
-class MentalHealthPage(View):
+class MentalHealthPage(LoginRequiredMixin,View):
     questions_cat1 = [
             {
                 'QID': 'MHQ011',
