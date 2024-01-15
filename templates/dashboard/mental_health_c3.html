@@ -1,0 +1,443 @@
+{% extends 'base/index.html' %}
+
+{% block title %}
+Quiz Time | {{site_name}}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container pt-3">
+    <div class="container2">
+        <div id="quiz-container">
+        </div>
+        <div id="result-container">
+            <h2>Your Final Score: <span id="final-score">0</span></h2>
+            <p id="mental-health-message"></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block styles %}
+<style>
+    .container2 {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #quiz-container {
+        max-width: 600px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    div {
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #result-container {
+        display: none;
+    }
+</style>
+{% endblock styles %}
+
+{% block scripts %}
+<script>
+    const quizData = [
+    {
+      QID: 'MHQ051',
+      Question: "How do you prioritize your mental health and well-being in your daily routine?",
+      Options: [
+          "Incorporate mindful practices, prioritize self-care, and seek professional support when needed",
+          "Occasionally engage in activities for mental well-being but not consistently",
+          "Neglect mental health due to various responsibilities",
+          "Feel unsure about how to prioritize mental health in your current stage of life"
+      ],
+      Correct5: "Incorporate mindful practices, prioritize self-care, and seek professional support when needed",
+      Correct3: "Occasionally engage in activities for mental well-being but not consistently"
+  },
+  {
+      QID: 'MHQ052',
+      Question: "When faced with a significant career decision, how do you approach it?",
+      Options: [
+          "Evaluate potential options, consider long-term implications, and seek advice from mentors",
+          "Go with the flow, taking opportunities as they come, but without a concrete plan",
+          "Avoid making long-term career decisions, feeling content with the present",
+          "Feel uncertain about the best approach to career decisions at this stage"
+      ],
+      Correct5: "Evaluate potential options, consider long-term implications, and seek advice from mentors",
+      Correct3: "Go with the flow, taking opportunities as they come, but without a concrete plan"
+  },
+  {
+      QID: 'MHQ053',
+      Question: "How do you navigate personal relationships and prioritize them in your busy life?",
+      Options: [
+          "Communicate openly, set boundaries, and allocate quality time for loved ones",
+          "Maintain relationships but struggle with finding enough time for loved ones",
+          "Prioritize personal relationships over other commitments",
+          "Feel uncertain about balancing personal relationships in your current stage of life"
+      ],
+      Correct5: "Communicate openly, set boundaries, and allocate quality time for loved ones",
+      Correct3: "Maintain relationships but struggle with finding enough time for loved ones"
+  },
+  {
+      QID: 'MHQ054',
+      Question: "When managing finances, what's your approach to long-term financial planning?",
+      Options: [
+          "Create a comprehensive financial plan, set clear goals, and invest strategically",
+          "Have general financial goals but lack a specific plan",
+          "Rely on short-term financial decisions without a long-term plan",
+          "Feel uncertain about effective long-term financial planning"
+      ],
+      Correct5: "Create a comprehensive financial plan, set clear goals, and invest strategically",
+      Correct3: "Have general financial goals but lack a specific plan"
+  },
+  {
+      QID: 'MHQ055',
+      Question: "How do you handle setbacks and challenges in your personal and professional life?",
+      Options: [
+          "Analyse the situation, learn from setbacks, and adjust your approach",
+          "Bounce back from setbacks but sometimes feel the impact on your confidence",
+          "Struggle to recover from setbacks and feel discouraged",
+          "Feel uncertain about how to effectively handle setbacks at this stage"
+      ],
+      Correct5: "Analyse the situation, learn from setbacks, and adjust your approach",
+      Correct3: "Bounce back from setbacks but sometimes feel the impact on your confidence"
+  },
+  {
+      QID: 'MHQ056',
+      Question: "How do you approach maintaining a healthy work-life balance as responsibilities evolve?",
+      Options: [
+          "Set clear boundaries, prioritize self-care, and ensure time for personal and family life",
+          "Prioritize work but find ways to integrate personal and family time",
+          "Overcommit to work responsibilities and neglect personal and family life",
+          "Feel uncertain about balancing work and personal responsibilities"
+      ],
+      Correct5: "Set clear boundaries, prioritize self-care, and ensure time for personal and family life",
+      Correct3: "Prioritize work but find ways to integrate personal and family time"
+  },
+  {
+      QID: 'MHQ057',
+      Question: "How do you adapt to changes in your social circles and make new connections?",
+      Options: [
+          "Embrace change, actively seek new connections, and engage in social activities",
+          "Maintain existing social circles but occasionally make new connections",
+          "Resist changes in social circles and prefer stability",
+          "Feel uncertain about adapting to social changes and making new connections"
+      ],
+      Correct5: "Embrace change, actively seek new connections, and engage in social activities",
+      Correct3: "Maintain existing social circles but occasionally make new connections"
+  },
+  {
+      QID: 'MHQ058',
+      Question: "When planning for retirement, what's your approach to financial preparation?",
+      Options: [
+          "Develop a detailed retirement plan, set savings goals, and invest strategically",
+          "Have a general idea of retirement goals but lack a specific financial plan",
+          "Avoid actively planning for retirement and hope for the best",
+          "Feel uncertain about effective retirement planning"
+      ],
+      Correct5: "Develop a detailed retirement plan, set savings goals, and invest strategically",
+      Correct3: "Have a general idea of retirement goals but lack a specific financial plan"
+  },
+  {
+      QID: 'MHQ059',
+      Question: "How do you cope with the aging process and changes in physical well-being?",
+      Options: [
+          "Prioritize health through regular exercise, healthy eating, and medical check-ups",
+          "Acknowledge changes but sometimes struggle with adapting to them",
+          "Neglect health concerns and avoid addressing age-related changes",
+          "Feel uncertain about effectively managing physical well-being in the aging process"
+      ],
+      Correct5: "Prioritize health through regular exercise, healthy eating, and medical check-ups",
+      Correct3: "Acknowledge changes but sometimes struggle with adapting to them"
+  },
+  {
+      QID: 'MHQ060',
+      Question: "How do you approach finding fulfillment and purpose in your life as you age?",
+      Options: [
+          "Reflect on personal values, set meaningful goals, and actively pursue purpose",
+          "Have general ideas of what brings fulfillment but lack a clear plan",
+          "Avoid actively seeking purpose, feeling content with the present",
+          "Feel uncertain about how to find fulfillment and purpose in your current stage of life"
+      ],
+      Correct5: "Reflect on personal values, set meaningful goals, and actively pursue purpose",
+      Correct3: "Have general ideas of what brings fulfillment but lack a clear plan"
+  },
+  {
+      QID: 'MHQ061',
+      Question: "How do you approach self-reflection and personal growth in your current stage of life?",
+      Options: [
+          "Regularly engage in self-reflection, set personal growth goals, and pursue continuous improvement",
+          "Occasionally reflect on personal growth but without a structured plan",
+          "Avoid self-reflection and personal development activities",
+          "Feel uncertain about how to approach self-reflection and personal growth"
+      ],
+      Correct5: "Regularly engage in self-reflection, set personal growth goals, and pursue continuous improvement",
+      Correct3: "Occasionally reflect on personal growth but without a structured plan"
+  },
+  {
+      QID: 'MHQ062',
+      Question: "When facing major life transitions, such as parenthood or career changes, how do you adapt?",
+      Options: [
+          "Embrace change, plan for transitions, and seek support from others",
+          "Navigate transitions but sometimes feel the impact on your well-being",
+          "Struggle to adapt to major life changes and feel overwhelmed",
+          "Feel uncertain about effectively managing major life transitions"
+      ],
+      Correct5: "Embrace change, plan for transitions, and seek support from others",
+      Correct3: "Navigate transitions but sometimes feel the impact on your well-being"
+  },
+  {
+      QID: 'MHQ063',
+      Question: "How do you maintain a sense of community and social connections as you age?",
+      Options: [
+          "Actively engage in community activities, maintain friendships, and foster social connections",
+          "Keep existing social connections but may not actively seek new ones",
+          "Withdraw from social activities and prefer solitude",
+          "Feel uncertain about fostering community and social connections"
+      ],
+      Correct5: "Actively engage in community activities, maintain friendships, and foster social connections",
+      Correct3: "Keep existing social connections but may not actively seek new ones"
+  },
+  {
+      QID: 'MHQ064',
+      Question: "When it comes to technology and digital communication, how do you stay informed and connected?",
+      Options: [
+          "Embrace technology, stay updated on digital trends, and use it to connect with others",
+          "Use technology but may feel overwhelmed by constant changes",
+          "Avoid using technology for communication and information",
+          "Feel uncertain about navigating technology in your current stage of life"
+      ],
+      Correct5: "Embrace technology, stay updated on digital trends, and use it to connect with others",
+      Correct3: "Use technology but may feel overwhelmed by constant changes"
+  },
+  {
+      QID: 'MHQ065',
+      Question: "How do you prioritize and maintain a healthy lifestyle, including diet and exercise?",
+      Options: [
+          "Prioritize health with regular exercise, balanced diet, and preventive health measures",
+          "Maintain a healthy lifestyle but may occasionally struggle to stay consistent",
+          "Neglect health habits and don't actively pursue a healthy lifestyle",
+          "Feel uncertain about effectively prioritizing and maintaining a healthy lifestyle"
+      ],
+      Correct5: "Prioritize health with regular exercise, balanced diet, and preventive health measures",
+      Correct3: "Maintain a healthy lifestyle but may occasionally struggle to stay consistent"
+  },
+  {
+      QID: 'MHQ066',
+      Question: "How do you manage and balance diverse responsibilities, including family, work, and personal pursuits?",
+      Options: [
+          "Prioritize tasks, set clear boundaries, and balance responsibilities effectively",
+          "Manage responsibilities but sometimes feel overwhelmed by competing demands",
+          "Struggle to balance responsibilities and often feel stressed",
+          "Feel uncertain about effectively managing diverse responsibilities"
+      ],
+      Correct5: "Prioritize tasks, set clear boundaries, and balance responsibilities effectively",
+      Correct3: "Manage responsibilities but sometimes feel overwhelmed by competing demands"
+  },
+  {
+      QID: 'MHQ067',
+      Question: "How do you cope with the loss of loved ones and navigate the grieving process?",
+      Options: [
+          "Seek support from others, engage in the grieving process, and honor the memories",
+          "Grieve in your own way but may find it challenging to cope with loss",
+          "Avoid confronting grief and loss, pushing emotions aside",
+          "Feel uncertain about navigating the grieving process effectively"
+      ],
+      Correct5: "Seek support from others, engage in the grieving process, and honor the memories",
+      Correct3: "Grieve in your own way but may find it challenging to cope with loss"
+  },
+  {
+      QID: 'MHQ068',
+      Question: "How do you approach financial planning for your children's education or other future expenses?",
+      Options: [
+          "Develop a comprehensive financial plan, set savings goals, and invest strategically",
+          "Have general financial goals for future expenses but lack a specific plan",
+          "Avoid actively planning for future expenses and hope for the best",
+          "Feel uncertain about effective financial planning for future expenses"
+      ],
+      Correct5: "Develop a comprehensive financial plan, set savings goals, and invest strategically",
+      Correct3: "Have general financial goals for future expenses but lack a specific plan"
+  },
+  {
+      QID: 'MHQ069',
+      Question: "How do you maintain a sense of purpose and fulfillment in your career as you progress in your professional life?",
+      Options: [
+          "Set meaningful career goals, adapt to changes, and actively seek fulfillment",
+          "Find satisfaction in your career but may occasionally feel a lack of purpose",
+          "Feel stuck in your career and uncertain about finding purpose",
+          "Feel uncertain about how to navigate career fulfillment as you age"
+      ],
+      Correct5: "Set meaningful career goals, adapt to changes, and actively seek fulfillment",
+      Correct3: "Find satisfaction in your career but may occasionally feel a lack of purpose"
+  },
+  {
+      QID: 'MHQ070',
+      Question: "How do you approach making time for personal hobbies and interests amid a busy schedule?",
+      Options: [
+          "Prioritize personal interests, allocate time for hobbies, and find joy in leisure activities",
+          "Engage in hobbies but struggle to consistently make time for personal interests",
+          "Neglect personal interests due to a busy schedule",
+          "Feel uncertain about effectively making time for personal hobbies"
+      ],
+      Correct5: "Prioritize personal interests, allocate time for hobbies, and find joy in leisure activities",
+      Correct3: "Engage in hobbies but struggle to consistently make time for personal interests"
+  }
+];
+
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    const shuffledQuizData = shuffleArray(quizData);
+
+    let currentQuestion = 0;
+    let score = 0;
+    const quizContainer = document.getElementById("quiz-container");
+    const resultContainer = document.getElementById("result-container");
+    const finalScoreElement = document.getElementById("final-score");
+    
+
+    
+    let timer;
+    const timerDuration = 30;
+
+    
+
+    function displayQuestion() {
+      if (currentQuestion < 10) {
+        const questionData = shuffledQuizData[currentQuestion];
+
+        let optionsHTML = "";
+        const shuffledOptions = shuffleArray(questionData.Options);
+        shuffledOptions.forEach((option, index) => {
+          optionsHTML += `<div><input type="radio" name="option" value="${index}">${option}</div>`;
+        });
+
+        
+          quizContainer.innerHTML = `
+                      <h2>${questionData.Question}</h2>
+                      <form id="quiz-form">
+                          ${optionsHTML}
+                          <button type="button" onclick="checkAnswer()">Submit</button>
+                      </form>
+                      <p id="timer"></p>
+                  `;
+        
+
+        startTimer();
+      } else {
+        showResult();
+      }
+    }
+
+    function startTimer() {
+      let timeLeft = timerDuration;
+      timer = setInterval(() => {
+        document.getElementById(
+          "timer"
+        ).innerText = `Time Left: ${timeLeft} seconds`;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          currentQuestion++;
+          displayQuestion()
+          checkAnswer();
+        }
+
+        timeLeft--;
+      }, 1000);
+    }
+
+    function checkAnswer() {
+      const selectedOption = document.querySelector(
+      'input[name="option"]:checked'
+    );
+      console.log("in check option ",selectedOption)
+
+      if(!selectedOption){
+          console.log("No option selected");
+        return;
+      }
+      clearInterval(timer);
+
+      if (selectedOption) {
+        const selectedOptionIndex = parseInt(selectedOption.value);
+        const questionData = shuffledQuizData[currentQuestion];
+
+        if (
+          questionData.Options[selectedOptionIndex] ===
+            questionData.Correct5 ||
+          questionData.Options[selectedOptionIndex] === questionData.Correct3
+        ) {
+          console.log("Correct Answer");
+          if (
+            questionData.Options[selectedOptionIndex] ===
+            questionData.Correct5
+          ) {
+            score += 5;
+          } else {
+            score += 3;
+          }
+        }
+        console.log("wrong answer");
+
+        currentQuestion++;
+
+        displayQuestion();
+      }
+    }
+
+    function showResult() {
+      quizContainer.style.display = "none";
+      resultContainer.style.display = "block";
+
+      const mentalHealthScore = score * 2;
+
+      finalScoreElement.innerText = mentalHealthScore;
+
+      const mentalHealthMessageElement = document.getElementById(
+        "mental-health-message"
+      );
+      if (mentalHealthScore < 45) {
+        mentalHealthMessageElement.innerText =
+          "Your Mental Health is Not Good. Give rest to your mind and visit a doctor.";
+      } else if (mentalHealthScore >= 45 && mentalHealthScore <= 85) {
+        mentalHealthMessageElement.innerText =
+          "Your Mental Health is Good. You can relax and work harder.";
+      } else {
+        mentalHealthMessageElement.innerText =
+          "Your Mental Health is Awesome. You are fully energetic to Rock!";
+      }
+    }
+
+    displayQuestion();
+  </script>
+{% endblock scripts %}

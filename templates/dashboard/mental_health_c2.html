@@ -1,0 +1,442 @@
+{% extends 'base/index.html' %}
+
+{% block title %}
+Quiz Time | {{site_name}}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container pt-3">
+    <div class="container2">
+        <div id="quiz-container">
+        </div>
+        <div id="result-container">
+            <h2>Your Final Score: <span id="final-score">0</span></h2>
+            <p id="mental-health-message"></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block styles %}
+<style>
+    .container2 {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #quiz-container {
+        max-width: 600px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    div {
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #result-container {
+        display: none;
+    }
+</style>
+{% endblock styles %}
+
+{% block scripts %}
+<script>
+  const quizData = [
+{
+QID: 'MHQ031',
+Question: "How do you typically manage work-related stress?",
+Options: [
+ "Utilize stress management techniques and communicate with colleagues or supervisors",
+ "Push through the stress, hoping it will get better with time",
+ "Keep stress to yourself and avoid discussing it with others",
+ "Ignore work-related stress and hope it goes away"
+],
+Correct5: "Utilize stress management techniques and communicate with colleagues or supervisors",
+Correct3: "Push through the stress, hoping it will get better with time"
+},
+{
+QID: 'MHQ032',
+Question: "If you're feeling overwhelmed with personal commitments, what's your first step?",
+Options: [
+ "Prioritize tasks and delegate when possible",
+ "Keep trying to handle everything on your own",
+ "Ignore some responsibilities and hope they resolve themselves",
+ "Feel too stressed to address the commitments"
+],
+Correct5: "Prioritize tasks and delegate when possible",
+Correct3: "Keep trying to handle everything on your own"
+},
+{
+QID: 'MHQ033',
+Question: "How do you approach making decisions about your career path?",
+Options: [
+ "Set clear goals, research options, and seek advice from mentors",
+ "Go with the flow, taking opportunities as they come",
+ "Avoid making long-term career decisions",
+ "Feel unsure and overwhelmed about career choices"
+],
+Correct5: "Set clear goals, research options, and seek advice from mentors",
+Correct3: "Go with the flow, taking opportunities as they come"
+},
+{
+QID: 'MHQ034',
+Question: "When facing a setback in your personal life, how do you cope?",
+Options: [
+ "Seek support from friends, family, or a counsellor",
+ "Reflect on the situation, learn from it, and move forward",
+ "Keep emotions to yourself and try to handle it independently",
+ "Withdraw from others and avoid dealing with the setback"
+],
+Correct5: "Seek support from friends, family, or a counsellor",
+Correct3: "Reflect on the situation, learn from it, and move forward"
+},
+{
+QID: 'MHQ035',
+Question: "How do you handle conflicts in your relationships?",
+Options: [
+ "Communicate openly, listen actively, and work towards a resolution",
+ "Give it time and hope the issue resolves itself",
+ "Avoid confrontation to maintain peace",
+ "Feel overwhelmed and unsure how to address conflicts"
+],
+Correct5: "Communicate openly, listen actively, and work towards a resolution",
+Correct3: "Give it time and hope the issue resolves itself"
+},
+{
+QID: 'MHQ036',
+Question: "When it comes to setting personal goals, what's your approach?",
+Options: [
+ "Set specific, measurable goals and create a plan to achieve them",
+ "Have general ideas of what you want without a concrete plan",
+ "Avoid setting goals to prevent potential failure",
+ "Feel uncertain about what you want to achieve"
+],
+Correct5: "Set specific, measurable goals and create a plan to achieve them",
+Correct3: "Have general ideas of what you want without a concrete plan"
+},
+{
+QID: 'MHQ037',
+Question: "How do you prioritize self-care in your daily life?",
+Options: [
+ "Make time for regular self-care activities, such as exercise and relaxation",
+ "Occasionally engage in self-care activities when time allows",
+ "Neglect self-care due to a busy schedule",
+ "Feel unsure about what constitutes self-care"
+],
+Correct5: "Make time for regular self-care activities, such as exercise and relaxation",
+Correct3: "Occasionally engage in self-care activities when time allows"
+},
+{
+QID: 'MHQ038',
+Question: "What's your approach to managing financial responsibilities?",
+Options: [
+ "Create a budget, track expenses, and plan for future financial goals",
+ "Spend without a clear budget, hoping for the best",
+ "Avoid dealing with finances and hope they work out on their own",
+ "Feel overwhelmed and anxious about financial responsibilities"
+],
+Correct5: "Create a budget, track expenses, and plan for future financial goals",
+Correct3: "Spend without a clear budget, hoping for the best"
+},
+{
+QID: 'MHQ039',
+Question: "How do you react when facing uncertainties or unexpected changes in life?",
+Options: [
+ "Embrace change as an opportunity for growth and adapt accordingly",
+ "Feel uneasy but eventually adapt to new circumstances",
+ "Resist change and prefer stability",
+ "Experience high anxiety and struggle to cope with uncertainties"
+],
+Correct5: "Embrace change as an opportunity for growth and adapt accordingly",
+Correct3: "Feel uneasy but eventually adapt to new circumstances"
+},
+{
+QID: 'MHQ040',
+Question: "How do you manage your work-life balance?",
+Options: [
+ "Set boundaries, prioritize personal time, and avoid overworking",
+ "Often work long hours but find time for personal activities",
+ "Neglect personal time due to a heavy workload",
+ "Feel unsure about how to balance work and personal life"
+],
+Correct5: "Set boundaries, prioritize personal time, and avoid overworking",
+Correct3: "Often work long hours but find time for personal activities"
+},
+{
+QID: 'MHQ041',
+Question: "How do you approach networking and building professional connections?",
+Options: [
+ "Actively seek networking opportunities and cultivate professional relationships",
+ "Network occasionally but rely more on individual skills and experience",
+ "Avoid networking, believing that skills alone will pave the way",
+ "Feel unsure about how to navigate professional relationships"
+],
+Correct5: "Actively seek networking opportunities and cultivate professional relationships",
+Correct3: "Network occasionally but rely more on individual skills and experience"
+},
+{
+QID: 'MHQ042',
+Question: "When you encounter setbacks in your academic or professional pursuits, what's your response?",
+Options: [
+ "Analyse the situation, learn from the setback, and adjust your approach",
+ "Feel disappointed but keep going, hoping things will improve",
+ "Become discouraged and question your abilities",
+ "Avoid pursuing further goals to prevent future setbacks"
+],
+Correct5: "Analyse the situation, learn from the setback, and adjust your approach",
+Correct3: "Feel disappointed but keep going, hoping things will improve"
+},
+{
+QID: 'MHQ043',
+Question: "How do you prioritize mental health in your daily routine?",
+Options: [
+ "Incorporate mindfulness or meditation practices and prioritize mental well-being",
+ "Occasionally engage in activities for mental well-being but not consistently",
+ "Neglect mental health due to a busy schedule",
+ "Feel unsure about how to prioritize mental health"
+],
+Correct5: "Incorporate mindfulness or meditation practices and prioritize mental well-being",
+Correct3: "Occasionally engage in activities for mental well-being but not consistently"
+},
+{
+QID: 'MHQ044',
+Question: "What's your approach to handling disagreements or conflicts at work?",
+Options: [
+ "Communicate openly, seek compromise, and work towards resolution",
+ "Let time pass, hoping the issue will resolve itself",
+ "Avoid addressing conflicts to maintain a harmonious work environment",
+ "Feel overwhelmed and unsure how to handle workplace conflicts"
+],
+Correct5: "Communicate openly, seek compromise, and work towards resolution",
+Correct3: "Let time pass, hoping the issue will resolve itself"
+},
+{
+QID: 'MHQ045',
+Question: "How do you stay motivated to achieve long-term goals in your personal or professional life?",
+Options: [
+ "Break goals into smaller tasks, celebrate achievements, and stay focused",
+ "Keep goals in mind but sometimes lack motivation to pursue them consistently",
+ "Avoid setting long-term goals to prevent potential disappointment",
+ "Feel uncertain about setting and achieving long-term goals"
+],
+Correct5: "Break goals into smaller tasks, celebrate achievements, and stay focused",
+Correct3: "Keep goals in mind but sometimes lack motivation to pursue them consistently"
+},
+{
+QID: 'MHQ046',
+Question: "How do you manage your digital well-being and screen time?",
+Options: [
+ "Set limits on screen time, take breaks, and prioritize face-to-face interactions",
+ "Use technology without strict limits but try to balance screen time",
+ "Neglect setting limits on screen time and use technology excessively",
+ "Feel unsure about how to manage digital well-being"
+],
+Correct5: "Set limits on screen time, take breaks, and prioritize face-to-face interactions",
+Correct3: "Use technology without strict limits but try to balance screen time"
+},
+{
+QID: 'MHQ047',
+Question: "When it comes to personal development, how do you seek continuous improvement?",
+Options: [
+ "Engage in regular learning, seek feedback, and actively pursue personal growth",
+ "Occasionally explore new opportunities for improvement but not consistently",
+ "Avoid seeking personal development opportunities",
+ "Feel unsure about how to approach personal development"
+],
+Correct5: "Engage in regular learning, seek feedback, and actively pursue personal growth",
+Correct3: "Occasionally explore new opportunities for improvement but not consistently"
+},
+{
+QID: 'MHQ048',
+Question: "How do you handle challenges related to time management and productivity?",
+Options: [
+ "Prioritize tasks, use time management tools, and set clear goals",
+ "Manage time reasonably well but occasionally struggle with productivity",
+ "Neglect time management and often feel overwhelmed",
+ "Feel unsure about effective time management strategies"
+],
+Correct5: "Prioritize tasks, use time management tools, and set clear goals",
+Correct3: "Manage time reasonably well but occasionally struggle with productivity"
+},
+{
+QID: 'MHQ049',
+Question: "How do you approach maintaining a healthy work-life-social balance?",
+Options: [
+ "Set clear boundaries, allocate time for work, personal life, and socializing",
+ "Prioritize work but find time for personal and social activities",
+ "Neglect personal and social activities due to work commitments",
+ "Feel unsure about how to balance work, personal life, and socializing"
+],
+Correct5: "Set clear boundaries, allocate time for work, personal life, and socializing",
+Correct3: "Prioritize work but find time for personal and social activities"
+},
+{
+QID: 'MHQ050',
+Question: "When planning for the future, how do you approach setting financial goals?",
+Options: [
+ "Create a detailed financial plan, set savings goals, and invest strategically",
+ "Have general financial goals but lack a specific plan",
+ "Avoid setting financial goals and hope for the best",
+ "Feel uncertain about financial goal-setting and planning"
+],
+Correct5: "Create a detailed financial plan, set savings goals, and invest strategically",
+Correct3: "Have general financial goals but lack a specific plan"
+}
+];
+
+function shuffleArray(array) {
+for (let i = array.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[array[i], array[j]] = [array[j], array[i]];
+}
+return array;
+}
+
+const shuffledQuizData = shuffleArray(quizData);
+
+let currentQuestion = 0;
+let score = 0;
+const quizContainer = document.getElementById("quiz-container");
+const resultContainer = document.getElementById("result-container");
+const finalScoreElement = document.getElementById("final-score");
+
+
+
+let timer;
+const timerDuration = 30;
+
+
+
+function displayQuestion() {
+if (currentQuestion < 10) {
+const questionData = shuffledQuizData[currentQuestion];
+
+let optionsHTML = "";
+const shuffledOptions = shuffleArray(questionData.Options);
+shuffledOptions.forEach((option, index) => {
+ optionsHTML += `<div><input type="radio" name="option" value="${index}">${option}</div>`;
+});
+
+
+ quizContainer.innerHTML = `
+             <h2>${questionData.Question}</h2>
+             <form id="quiz-form">
+                 ${optionsHTML}
+                 <button type="button" onclick="checkAnswer()">Submit</button>
+             </form>
+             <p id="timer"></p>
+         `;
+
+
+startTimer();
+} else {
+showResult();
+}
+}
+
+function startTimer() {
+let timeLeft = timerDuration;
+timer = setInterval(() => {
+document.getElementById(
+ "timer"
+).innerText = `Time Left: ${timeLeft} seconds`;
+
+if (timeLeft <= 0) {
+ clearInterval(timer);
+ currentQuestion++;
+ displayQuestion()
+ checkAnswer();
+}
+
+timeLeft--;
+}, 1000);
+}
+
+function checkAnswer() {
+const selectedOption = document.querySelector(
+'input[name="option"]:checked'
+);
+console.log("in check option ",selectedOption)
+
+if(!selectedOption){
+ console.log("No option selected");
+return;
+}
+clearInterval(timer);
+
+if (selectedOption) {
+const selectedOptionIndex = parseInt(selectedOption.value);
+const questionData = shuffledQuizData[currentQuestion];
+
+if (
+ questionData.Options[selectedOptionIndex] ===
+   questionData.Correct5 ||
+ questionData.Options[selectedOptionIndex] === questionData.Correct3
+) {
+ console.log("Correct Answer");
+ if (
+   questionData.Options[selectedOptionIndex] ===
+   questionData.Correct5
+ ) {
+   score += 5;
+ } else {
+   score += 3;
+ }
+}
+console.log("wrong answer");
+
+currentQuestion++;
+
+displayQuestion();
+}
+}
+
+function showResult() {
+quizContainer.style.display = "none";
+resultContainer.style.display = "block";
+
+const mentalHealthScore = score * 2;
+
+finalScoreElement.innerText = mentalHealthScore;
+
+const mentalHealthMessageElement = document.getElementById(
+"mental-health-message"
+);
+if (mentalHealthScore < 45) {
+mentalHealthMessageElement.innerText =
+ "Your Mental Health is Not Good. Give rest to your mind and visit a doctor.";
+} else if (mentalHealthScore >= 45 && mentalHealthScore <= 85) {
+mentalHealthMessageElement.innerText =
+ "Your Mental Health is Good. You can relax and work harder.";
+} else {
+mentalHealthMessageElement.innerText =
+ "Your Mental Health is Awesome. You are fully energetic to Rock!";
+}
+}
+
+displayQuestion();
+</script>
+{% endblock scripts %}

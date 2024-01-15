@@ -69,3 +69,65 @@ class TdeeData(models.Model):
             key: round(value, 2) for key, value in macronutrients.items()
         }
         return rounded_macronutrients
+
+class Nutrition(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
+    ip_address = models.GenericIPAddressField(auto_created=True, null=True, blank=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    is_completed = models.BooleanField(default=False)
+
+    def get_diet_total_energy(self):
+        orderitems = self.nutritionitems_set.all()
+        total = sum([item.get_total_energy() for item in orderitems])
+        return total
+
+    def get_diet_total_protein(self):
+        orderitems = self.nutritionitems_set.all()
+        total = sum([item.get_total_protein() for item in orderitems])
+        return total
+
+    def get_diet_total_fat(self):
+        orderitems = self.nutritionitems_set.all()
+        total = sum([item.get_total_fat() for item in orderitems])
+        return total
+
+    def get_diet_total_carbohydrates(self):
+        orderitems = self.nutritionitems_set.all()
+        total = sum([item.get_total_carbohydrates() for item in orderitems])
+        return total
+
+
+    def __str__(self):
+        return f'{self.id}-{self.user}'
+
+class NutritionItems(models.Model):
+    order = models.ForeignKey(Nutrition, on_delete=models.CASCADE, null=True)
+    quantity = models.IntegerField(default=1)
+    date = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=255)
+    img_url = models.URLField(null=True,blank=True)
+    energy = models.FloatField()
+    protein = models.FloatField()
+    fat = models.FloatField()
+    carbohydrates = models.FloatField()
+
+    def get_total_energy(self):
+        total = self.energy * self.quantity
+        return total
+    
+    def get_total_protein(self):
+        total = self.protein * self.quantity
+        return total
+    
+    def get_total_fat(self):
+        total = self.fat * self.quantity
+        return total
+    
+    def get_total_carbohydrates(self):
+        total = self.carbohydrates * self.quantity
+        return total
+
+    def __str__(self):
+        return self.name
