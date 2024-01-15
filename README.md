@@ -57,15 +57,7 @@ FitMetric is designed to revolutionize personal health and wellness by providing
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/a6837962-dbc7-4e6f-929c-62b9fc1e661e)
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/0f8d22a6-6984-4b48-980c-367472bf7aa0)
 
-### 7. Disease Prediction
-- Enter symptoms to receive predictions about potential health issues.
-- This tool is not a substitute for professional medical advice but serves as an informative guide.
-
-![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/74156dfd-747d-4a08-9700-532968bc3f8e)
-![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/3cd753fe-c30e-4767-8c8e-6aa1ee9990af)
-![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/3cd3e60b-93c7-4d1e-8199-93d2b98131c0)
-
-### 8. Remote Monitoring Categories
+### 7. Remote Monitoring Categories
 
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/a936701a-57ba-4f41-a9e9-3eea5d60e78d)
 
@@ -111,27 +103,27 @@ FitMetric is designed to revolutionize personal health and wellness by providing
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/49d4859b-c9ad-4d8d-90c0-a260ea0d8901)
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/51e21860-29b3-49af-9755-374def8ed1c9)
 
-### 9. Mental Quiz
+### 8. Mental Quiz
 - Take a mental quiz that analyzes your mental status and categorizes it into three distinct categories: high, moderate, and low mental fitness.
 
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/6b98a5dd-a963-404f-a279-def2ac645b92)
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/092bb0a8-9702-44fb-80a6-b94772a7a8df)
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/0c579885-6274-4304-9e07-c6e0b3474686)
 
-### 10. Blog Page
+### 9. Blog Page
 - Read and contribute to a health-focused blog to stay informed and motivated.
 - Share your experiences and learn from others on the journey to better health.
 
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/bb709ed6-d6b3-4bdd-88a9-aa8cdb7f610a)
 
-### 11. Chatbot Support
+### 10. Chatbot Support
 - Access a chatbot for quick assistance and information.
 - Get instant responses to health-related queries.
 
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/c19c086b-f84c-467e-8e89-1d2f3ed9fcc3)
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/d839e86e-5e89-4572-9e9a-b9db4b12e357)
 
-### 12. Contact Us
+### 11. Contact Us
 - Reach out to us for any questions, concerns, or feedback.
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/bafe98cc-11ef-46bb-9a66-4d618b7cf934)
 
