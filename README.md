@@ -108,7 +108,7 @@ FitMetric is designed to revolutionize personal health and wellness by providing
 - Track kidney function remotely.
 - Receive insights into maintaining kidney health and preventing issues.
 
-![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/89bea6aa-e475-4e38-9164-11094cf8397d)
+![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/49d4859b-c9ad-4d8d-90c0-a260ea0d8901)
 ![image](https://github.com/Venkatnvs/FitMetric/assets/134759689/51e21860-29b3-49af-9755-374def8ed1c9)
 
 ### 9. Mental Quiz
