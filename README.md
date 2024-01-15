@@ -153,4 +153,8 @@ python manage.py runserver
 Note: If it is showing error edit ENTER_SECRET_KEY, ENTER_PASSWORD, ENTER_EMAIL, ENTER_HOST_USERNAME in env.txt from main directory and paste as .env in FitMetric/FitMetric path
 
 ## This project was created by Team Brain Wave for Hack-For-Health Hackathon conducted by GeeksforGeeks.
-## For any query feel free to contact aksmlibts@gmail.com
+## For any query feel free to contact 
+contact@fitmetric.nvsapp.cf
+aksmlibts@gmail.com
+venkatnvs2005@gmail.com
+
