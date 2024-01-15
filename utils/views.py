@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 import json
 from validate_email import validate_email
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
-from .models import ContactUs
+from .models import ContactUs,SubscribedUsers
 
 User = get_user_model()
 
@@ -55,3 +55,24 @@ class ContactUsForm(View):
         contact.save()
         messages.success(request,"We will get in touch soon.")
         return render(request,"utils/contact_us.html")
+    
+class SubscribePage(View):
+    def post(self,request):
+        email = request.POST['email']
+        if request.user.is_authenticated:
+            by_lgu = True
+        else:
+            by_lgu = False
+        if not validate_email(email):
+            messages.error(request,"Email is invalid")
+            return redirect("main-home")
+        if SubscribedUsers.objects.filter(email=email).exists():
+            messages.error(request,"Email is already Subscribed")
+            return redirect("main-home")
+        s = SubscribedUsers.objects.create(
+            email = email,
+            by_login_user = by_lgu,
+        )
+        s.save()
+        messages.success(request,"You Subscribed to the Newsletter.")
+        return redirect("main-home")

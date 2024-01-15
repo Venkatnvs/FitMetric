@@ -13,3 +13,13 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email}"
+
+class SubscribedUsers(models.Model):
+    email = models.CharField(unique=True, max_length=50)
+    by_login_user = models.BooleanField(default=False)
+    is_ignored = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f"{self.email}"

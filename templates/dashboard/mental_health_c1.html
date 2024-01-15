@@ -21,6 +21,10 @@ Quiz Time | {{site_name}}
 
 {% block styles %}
 <style>
+    input[type='radio']{
+        width: 17px;
+        height: 17px;
+    }
     .container2 {
         font-family: Arial, sans-serif;
         display: flex;
@@ -351,7 +355,7 @@ Quiz Time | {{site_name}}
               let optionsHTML = "";
               const shuffledOptions = shuffleArray(questionData.Options);
               shuffledOptions.forEach((option, index) => {
-                optionsHTML += `<div><input type="radio" name="option" value="${index}">${option}</div>`;
+                optionsHTML += `<div><input class="mx-1" type="radio" name="option" value="${index}">${option}</div>`;
               });
     
               

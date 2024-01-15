@@ -185,9 +185,6 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('EMAIL_FROM_EMAIL')
 
-# Google Api Key
-GOOGLE_API_KEY = config('GOOGLE_API_KEY')
-
 # Newsapi
 NEWS_API = config('NEWS_API')
 

@@ -13,7 +13,7 @@ Mental Health | {{site_name}}
         <p>{{result}}</p>
     </div>
     {% else %}
-    <form id="form-target" action="{% url 'predict-mental-health' %}" method="POST">
+    <form id="form-target" action="{% url 'predict-depression-level' %}" method="POST">
         {% csrf_token %}
         <div class="row">
             
@@ -21,7 +21,7 @@ Mental Health | {{site_name}}
             <p class="subheading text-gray text-center">Fill all the answers and click submit to see the result</p>
             <div class="col-md-6 d-flex flex-column align-items-stretch">
                 <div class="card">
-                    <p>I have little or no interest in doing things.</p>
+                    <p>1. I have little or no interest in doing things.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>
                         <input id="01" type="radio" name="q1" value="0" required>
@@ -34,7 +34,7 @@ Mental Health | {{site_name}}
                     </div>
                 </div>
                 <div class="card">
-                    <p>I feel down and hopeless.</p>
+                    <p>3. I feel down and hopeless.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>
                         <input id="01" type="radio" name="q2" value="0" required>
@@ -47,7 +47,7 @@ Mental Health | {{site_name}}
                     </div>
                 </div>
                 <div class="card">
-                    <p>I either have trouble falling asleep or I end up sleeping too
+                    <p>5. I either have trouble falling asleep or I end up sleeping too
                         much.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>
@@ -61,7 +61,7 @@ Mental Health | {{site_name}}
                     </div>
                 </div>
                 <div class="card">
-                    <p>I am tired all the time.</p>
+                    <p>7. I am tired all the time.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>
                         <input id="01" type="radio" name="q4" value="0" required>
@@ -74,7 +74,7 @@ Mental Health | {{site_name}}
                     </div>
                 </div>
                 <div class="card">
-                    <p>I have a poor appetite or I am eating too much these days.</p>
+                    <p>9. I have a poor appetite or I am eating too much these days.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>
                         <input id="01" type="radio" name="q5" value="0" required>
@@ -90,7 +90,7 @@ Mental Health | {{site_name}}
             </div>
             <div class="col-md-6 d-flex flex-column align-items-stretch">
                 <div class="card">
-                    <p>I feel like a failure and a burden. I have let everyone down.</p>
+                    <p>2. I feel like a failure and a burden. I have let everyone down.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>
                         <input id="01" type="radio" name="q6" value="0" required>
@@ -103,7 +103,7 @@ Mental Health | {{site_name}}
                     </div>
                 </div>
                 <div class="card">
-                    <p>I can't concentrate on anything I pick up. I keep getting
+                    <p>4. I can't concentrate on anything I pick up. I keep getting
                         distracted by everything and nothing.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>
@@ -117,7 +117,7 @@ Mental Health | {{site_name}}
                     </div>
                 </div>
                 <div class="card">
-                    <p>Even moving from one place to another or talking to my
+                    <p>6. Even moving from one place to another or talking to my
                         friends and family feels like a chore. I have no energy for
                         being social.</p>
                     <div class="card-item">
@@ -132,7 +132,7 @@ Mental Health | {{site_name}}
                     </div>
                 </div>
                 <div class="card">
-                    <p>I sometimes think that my dying would ease the burdens of
+                    <p>8. I sometimes think that my dying would ease the burdens of
                         everyone around me.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>
@@ -146,7 +146,7 @@ Mental Health | {{site_name}}
                     </div>
                 </div>
                 <div class="card">
-                    <p>There's so much going on in my head that I keep messing up
+                    <p>10. There's so much going on in my head that I keep messing up
                         at work, home, school, or with other people.</p>
                     <div class="card-item">
                         <label for="01">I don't feel like this.</label>

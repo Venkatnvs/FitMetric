@@ -13,11 +13,11 @@ from django.contrib.auth.decorators import login_required
 def Home(request):
     return render(request,"predict/index.html")
 
-class MentalHealthPage(LoginRequiredMixin,View):
-    model_path = os.path.join(settings.BASE_DIR, "ml_models", "mental_health.pkl")
+class DepressionLevelPage(LoginRequiredMixin,View):
+    model_path = os.path.join(settings.BASE_DIR, "ml_models", "depression_level.pkl")
 
     def get(self,request):
-        return render(request,"predict/mental_health.html")
+        return render(request,"predict/depression_level_p.html")
     
     def post(self,request):
         q1 = float(request.POST['q1'])
@@ -54,7 +54,7 @@ class MentalHealthPage(LoginRequiredMixin,View):
         context = {
             "result":guess,
         }
-        return render(request,"predict/mental_health.html",context)
+        return render(request,"predict/depression_level_p.html",context)
     
 
 class DiabetesPredict(LoginRequiredMixin,View):
