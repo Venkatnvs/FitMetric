@@ -10,3 +10,5 @@ django-allauth
 djangorestframework
 scikit-learn==1.2.2
 pandas
+requests
+pillow
