@@ -10,6 +10,9 @@ django-allauth
 PyJWT
 cryptography
 djangorestframework
+numpy<2.0
+scipy
+joblib
 scikit-learn==1.2.2
 pandas
 requests
