@@ -12,7 +12,7 @@ class BlogHome(View):
     forward = []
 
     def news_data(self):
-        news_url = f'https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey={settings.NEWS_API}'
+        news_url = f'https://newsapi.org/v2/top-headlines?category=health&apiKey={settings.NEWS_API}'
         news = requests.get(news_url).json()
         news_data = news['articles']
         return news_data
