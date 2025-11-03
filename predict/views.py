@@ -86,7 +86,7 @@ class DiabetesPredict(LoginRequiredMixin,View):
         context = {
             "result":guess,
         }
-        return render(request,'predict/mental_health.html',context)
+        return render(request,'predict/diabetes_p.html',context)
 
 class HeartPrediction(LoginRequiredMixin,View):
     model_path = os.path.join(settings.BASE_DIR, "ml_models", "heart_disease.joblib")
